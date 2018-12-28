@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@pxblue/themes/angular/theme.scss';
+
+$custom-typography: mat-typography-config($font-family: 'OpenSans, Arial, Helvetica, sans-serif;');
+@include mat-core($custom-typography);
+
+body { 
+  margin: 0;
+}
+
+* {
+  //caution this will block text fields in safari
+  user-select: none;
+}
+
+.vert-btn.mat-icon-button.cdk-program-focused .mat-button-focus-overlay{
+  opacity: 0;
+}
+
+[flex-center]{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+[text-center]{
+  text-align: center;
+}
+
+.mat-nav-list .footer-list .mat-list-item .mat-list-item-content{
+  display: block;
+  padding: 5px 15px;
+}
+
+.mat-nav-list .footer-list .mat-list-item.mat-list-item-with-avatar .mat-list-item-content .mat-list-text{
+  padding: 5px 0 0;
+}
+.mat-nav-list .footer-list .mat-list-item.mat-list-item-with-avatar {
+  height: auto;
+}
+.footer-list{
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+// .footer-list .active,
+// .footer-list .active mat-icon{
+//   color: #083c6b
+// }
+
+
+.footer-list h3{
+  margin: 0 0 10px;
+}
+
+.mat-bottom-sheet-container{
+  padding: 0 !important;
+}

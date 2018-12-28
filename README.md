@@ -1,27 +1,27 @@
-# ComplexBottomsheet
+# Bottomsheet
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.
+This is a sample application showing how to build a complex bottomsheet. At the top of the page, the app bar has a 3dot icon on right. When clicking on 3dot icon bottomsheet slides up from bottom of the page, revealing filters that affect the whole page.
 
-## Development server
+## Running the example
+To run this example, first clone the repository. Each of our example projects comes with a branch for Angular and a branch for React. You can choose which branch to use when you clone the repository (or you can switch after cloning as well):
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+git clone https://github.com/pxblue/complex-bottomsheet -b Angular
+git clone https://github.com/pxblue/complex-bottomsheet -b React
+```
 
-## Code scaffolding
+Navigate to the project directory and install the necessary dependencies (note: our projects are set up to be run with yarn):
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+cd complex-bottomsheet
+yarn
+```
 
-## Build
+You can then run the example - this will launch the application in your browser:
+```
+yarn start
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+All of our code examples can also be found on [Stackblitz](http://www.stackblitz.com/@px-blue), which allows you to make changes to a project and see the updates to the rendered applciation in real-time.
+- [Angular](https://stackblitz.com/edit/pxblue-complex-bottomsheet-angular)
+- [React](https://stackblitz.com/edit/pxblue-complex-bottomsheet-react)

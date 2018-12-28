@@ -1,0 +1,47 @@
+<mat-nav-list>
+    <div class="footer-list">
+      <h3>Sort by</h3>
+      <div flex-center text-center>
+        <a mat-list-item [class.active]="activefilter == filterTypes.TIME" (click)="filterData(filterTypes?.TIME)">
+          <mat-icon mat-list-icon>access_time</mat-icon>
+          <span mat-line>Time</span>
+        </a>
+        <a mat-list-item [class.active]="activefilter == filterTypes.EVENT_TYPE" (click)="filterData(filterTypes.EVENTTYPE)">
+          <mat-icon mat-list-icon>info</mat-icon>
+          <span mat-line>Event Type</span>
+        </a>
+        <!-- <a mat-list-item (click)="openLink()">
+          <mat-icon mat-list-icon>priority_high</mat-icon>
+          <span mat-line>Priority</span>
+        </a> -->
+      </div>
+    </div>
+    <div class="footer-list">
+      <h3>Filter by</h3>
+      <div flex-center text-center>
+        <a mat-list-item [class.active]="activefilter == filterTypes.ACTIVE_ALARAMS" (click)="filterData(filterTypes.ACTIVE_ALARAMS)">
+          <mat-icon mat-list-icon>notifications_active</mat-icon>
+          <span mat-line>Active <br>Alarms</span>
+        </a>
+        <a mat-list-item [class.active]="activefilter == filterTypes.ALARAMS" (click)="filterData(filterTypes.ALARAMS)">
+          <mat-icon mat-list-icon>notifications</mat-icon>
+          <span mat-line>Alarms</span>
+        </a>
+        <!-- <a mat-list-item (click)="openLink()">
+          <mat-icon mat-list-icon>priority_high</mat-icon>
+          <span mat-line>Sessions</span>
+        </a> -->
+        <a mat-list-item [class.active]="activefilter == filterTypes.EVENTS" (click)="filterData(filterTypes.EVENTS)">
+          <mat-icon mat-list-icon>info</mat-icon>
+          <span mat-line>Events</span>
+        </a>
+      </div>
+    </div>
+  
+    <div class="footer-close">
+      <a mat-list-item (click)="openLink()">
+        <mat-icon mat-list-icon>close</mat-icon>
+        <span mat-line>Cancel</span>
+      </a>
+    </div>
+  </mat-nav-list>

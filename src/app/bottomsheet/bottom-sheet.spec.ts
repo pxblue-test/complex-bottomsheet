@@ -1,6 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { AppComponent } from './app.component';
+import { BottomSheet } from './bottom-sheet';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -32,19 +32,20 @@ import {
   MatToolbarModule,
   MatTooltipModule,
   MatBottomSheetModule,
-  MatBottomSheet
+  MatBottomSheetRef
 } from '@angular/material';
-import { AppService } from './app.service';
+import { AppService } from '../app.service';
 
-describe('AppComponent', () => {
-  let app: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;
-  let bottomSheetRef: MatBottomSheet;
+describe('BottomSheet', () => {
+  let app: BottomSheet;
+  let fixture: ComponentFixture<BottomSheet>;
+  let bottomSheetRef: MatBottomSheetRef;
+  let appService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        BottomSheet
       ],
       imports: [
         MatAutocompleteModule,
@@ -79,13 +80,16 @@ describe('AppComponent', () => {
         MatBottomSheetModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [AppService]
+      providers: [AppService, {provide: MatBottomSheetRef, useValue: {
+        dismiss: (dialogResult: any) => { }
+      }}]
     }).compileComponents().then(() => {
-      fixture = TestBed.createComponent(AppComponent);
+      fixture = TestBed.createComponent(BottomSheet);
       app = fixture.debugElement.componentInstance;
     });
 
-    bottomSheetRef = TestBed.get(MatBottomSheet);
+    bottomSheetRef = TestBed.get(MatBottomSheetRef);
+    appService = TestBed.get(AppService);
 
   }));
 
@@ -93,11 +97,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('showBottomSheet', async(() => {
-    let spy = spyOn(bottomSheetRef, 'open').and.returnValue(true);
-    app.showBottomSheet();
-    expect(bottomSheetRef.open).toHaveBeenCalled();
-    expect(bottomSheetRef.open).toBeTruthy();
+  it('openLink', async(() => {
+    let spy = spyOn(bottomSheetRef, 'dismiss').and.returnValue(true);
+    app.openLink(); 
+    expect(bottomSheetRef.dismiss).toHaveBeenCalled();
+    expect(bottomSheetRef.dismiss).toBeTruthy();
+  }));
+
+  it('filterData', async(() => {
+    let spy = spyOn(appService, 'filterAlarams').and.returnValue(null);
+    app.filterData('events'); 
+    expect(appService.filterAlarams).toHaveBeenCalled();
   }));
 
 });
