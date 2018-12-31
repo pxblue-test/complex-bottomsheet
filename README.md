@@ -1,4 +1,5 @@
 # Complex Bottomsheet
+[![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react)
 
 This is a sample application showing how to build a complex bottomsheet. At the top of the page, the app bar has a 3dot icon on right. When clicking on 3dot icon bottomsheet slides up from bottom of the page, revealing filters that affect the whole page.
 

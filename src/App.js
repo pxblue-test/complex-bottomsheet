@@ -21,7 +21,7 @@ import './style.css';
 import alarms, {formatDate} from './alarmData';
 
 const FiltersList = {
-  ACTIVE_ALARAMS : "activeAlarams",
+  ACTIVE_ALARMS : "activeAlarams",
   ALARAMS : "alarams",
   TIME : "time",
   EVENTS : "events",
@@ -53,7 +53,7 @@ class AlarmList extends React.Component {
       this.resetFilter();
     } else {
       switch (filterText) {
-        case FiltersList.ACTIVE_ALARAMS:
+        case FiltersList.ACTIVE_ALARMS:
           this.newdata = alarms.filter((item) => item.active);
           this.passData(this.newdata, filterText);
           break;
@@ -152,7 +152,7 @@ class AlarmList extends React.Component {
           <div className={classes.footerList}>
             <Typography variant="h6" gutterBottom>Filter by</Typography>
             <Grid container spacing={0}>
-              <Grid item xs={3} className={`${classes.col} ${this.state.activeFilter === FiltersList.ACTIVE_ALARAMS ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.ACTIVE_ALARAMS) }>
+              <Grid item xs={3} className={`${classes.col} ${this.state.activeFilter === FiltersList.ACTIVE_ALARMS ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.ACTIVE_ALARMS) }>
                   <NotificationsActive />
                   <Typography color="inherit">Active Alarams</Typography>
               </Grid>
