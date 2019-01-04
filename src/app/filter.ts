@@ -1,7 +1,8 @@
 export enum FiltersList {
-    ACTIVE_ALARAMS = "activeAlarams",
-    ALARAMS = "alarams",
-    TIME = "time",
-    EVENTS = "events",
-    EVENT_TYPE = "eventType"
-  }
+  ACTIVE_ALARAMS = "activeAlarams",
+  ALARAMS = "alarams",
+  TIME = "time",
+  SETTINGS = "settings",
+  EVENT_TYPE = "eventType",
+  SESSION = 'session'
+}

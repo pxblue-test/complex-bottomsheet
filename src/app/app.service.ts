@@ -8,81 +8,105 @@ import { FiltersList } from './filter';
 export class AppService {
 
   data: any[] = [];
-  activeFilter = 'events';
-  public newdata;
+  activeFilters = ['settings', 'activeAlarams', 'alarams', 'session'];
+  public newdata = this.data;
+  activeSort;
 
-  public dataSource = new BehaviorSubject(this.data);
+  private dataSource = new BehaviorSubject(this.data);
   list = this.dataSource.asObservable();
 
   public NOW = Date.now();
+  public TYPES = ['alarams', 'settings', 'session'];
   public LOCATIONS = ['Dos Valley Field', 'Jameson Field', 'Parker Field West', 'Parker Field East', 'North Park Garden'];
   public DEVICES = ['MX Power Pro', 'PXL DG1', 'Pentair Aurora'];
   public DETAILS = ['Over Voltage Fault', 'Over Current Fault', 'Under Voltage Fault', 'Under Current Fault'];
 
   constructor() {
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 20; i++) {
       this.data.push(this.getRandomData());
     }
+    this.sortAlarams(FiltersList.TIME);
   }
 
   getRandomData() {
     const date = Math.round(this.NOW - Math.random() * 1000000);
-    return {
-      date: Math.round(this.NOW - Math.random() * 1000000000),
-      active: Math.random() < .3,
-      location: this.LOCATIONS[Math.floor(Math.random() * this.LOCATIONS.length)],
-      device: this.DEVICES[Math.floor(Math.random() * this.DEVICES.length)],
-      details: this.DETAILS[Math.floor(Math.random() * this.DETAILS.length)]
+    const type = this.TYPES[Math.floor(Math.random() * this.TYPES.length)];
+    switch (type) {
+      case 'alarams':
+        return {
+          date: Math.round(this.NOW - Math.random() * 1000000000),
+          type: type,
+          active: Math.random() < .3,
+          location: this.LOCATIONS[Math.floor(Math.random() * this.LOCATIONS.length)],
+          device: this.DEVICES[Math.floor(Math.random() * this.DEVICES.length)],
+          details: this.DETAILS[Math.floor(Math.random() * this.DETAILS.length)]
+        }
+      case 'settings':
+        return {
+          date: Math.round(this.NOW - Math.random() * 1000000000),
+          type: type,
+          location: this.LOCATIONS[Math.floor(Math.random() * this.LOCATIONS.length)],
+          device: this.DEVICES[Math.floor(Math.random() * this.DEVICES.length)],
+          details: 'Settings changed'
+        }
+      case 'session':
+      default:
+        return {
+          date: Math.round(this.NOW - Math.random() * 1000000000),
+          type: type,
+          location: this.LOCATIONS[Math.floor(Math.random() * this.LOCATIONS.length)],
+          device: this.DEVICES[Math.floor(Math.random() * this.DEVICES.length)],
+          details: 'Run Session'
+        }
     }
   }
 
-  resetFilter() {
-    this.activeFilter = null;
-    this.dataSource.next(this.data);
-  }
 
   passData(data, filterText) {
     this.dataSource.next(data);
-    this.activeFilter = filterText;
+    this.activeSort = filterText;
   }
 
-  filterAlarams(filterText) {
-    if (this.activeFilter == filterText) {
-      this.resetFilter();
-    } else {
-      switch (filterText) {
-        case FiltersList.ACTIVE_ALARAMS:
-          this.newdata = this.data.filter((item) => item.active);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.ALARAMS:
-          this.newdata = this.data.filter((item) => !item.active);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.TIME:
-          this.newdata = [...this.data].sort((a, b) => a.date - b.date);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.EVENTS:
-          this.resetFilter();
-          this.activeFilter = filterText;
-          break;
-        case FiltersList.EVENT_TYPE:
-          this.newdata = [...this.data].sort((a, b) => {
-            const itemA = a.details.toUpperCase();
-            const itemB = b.details.toUpperCase();
-            let comparison = 0;
-            if (itemA > itemB) {
-              comparison = 1;
-            } else if (itemA < itemB) {
-              comparison = -1;
-            }
-            return comparison;
-          });
-          this.passData(this.newdata, filterText);
-          break;
-      }
+  sortAlarams(sortText) {
+    if (sortText == this.activeSort) {
+      return;
     }
+    switch (sortText) {
+      case FiltersList.EVENT_TYPE:
+        this.newdata = [...this.newdata].sort((a, b) => {
+          // primary sort by type
+          if (a.type < b.type) { return -1; }
+          else if (a.type > b.type) { return 1; }
+          else {
+            // secondary sort by alarm active and/or date 
+            if (a.type !== 'alarams') { return b.date - a.date; }
+            else {
+              if (a.active && !b.active) { return -1; }
+              else if (b.active && !a.active) { return 1; }
+              else { return b.date - a.date }
+            }
+          }
+        });
+        this.passData(this.newdata, sortText);
+        break;
+      case FiltersList.TIME:
+        this.newdata = [...this.newdata].sort((a, b) => b.date - a.date);
+        this.passData(this.newdata, sortText);
+        break;
+    }
+  }
+
+  filterAlarams(filterArray) {
+    this.newdata = [...this.data].filter((item) => {
+      if (item.type == 'alarams' && !item.active) {
+        return (filterArray.indexOf('alarams') > -1) ? true : false;
+      } else if (item.type == 'alarams' && item.active) {
+        return (filterArray.indexOf('activeAlarams') > -1) ? true : false;
+      } else {
+        return filterArray.indexOf(item.type) > -1;
+      }
+    });
+    this.dataSource.next(this.newdata);
   }
 
 }

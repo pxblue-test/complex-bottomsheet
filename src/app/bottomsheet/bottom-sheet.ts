@@ -10,23 +10,40 @@ import { FiltersList } from '../filter';
 })
 export class BottomSheet {
 
-  activefilter:any=FiltersList;
-
+  activefilters;
   filterTypes:any;
+  activeSort;
 
   constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheet>, private appService:AppService) {}
 
   ngOnInit(){
-    this.activefilter = this.appService.activeFilter;
+    this.activefilters = this.appService.activeFilters;
     this.filterTypes = FiltersList;
+    this.activeSort = this.appService.activeSort;
+    this.appService.sortAlarams(this.activeSort);
+    console.log(this.activefilters)
   }
 
   openLink(): void {
     this.bottomSheetRef.dismiss(); 
-  }
+  } 
 
   filterData(filter){
-    this.appService.filterAlarams(filter);
-    this.openLink(); 
+    const index = this.activefilters.indexOf(filter);
+    if(index > -1){
+      this.activefilters.splice(index,1)
+    }else{
+      this.activefilters.push(filter);
+    }
+    this.appService.filterAlarams(this.activefilters);
+  }
+
+  sortData(sortText){
+    this.activeSort = sortText;
+    this.appService.sortAlarams(sortText);
+  }
+
+  checkActive(filter){
+    return this.activefilters.indexOf(filter) > -1;
   }
 }
