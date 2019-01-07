@@ -1,86 +1,111 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import AlarmList from './App';
-
+import App from './App';
 
 Enzyme.configure({adapter: new Adapter()});
 
-it('allows to display all events', () => {
- 
-    const register= shallow(<AlarmList></AlarmList>).dive().instance();
-    const spy = spyOn(register, 'resetFilter').and.callThrough();
-    const data = [{ "date": 1545428583069, "active": false, "location": "Parker Field West", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1544988929886, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1545414474034, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1544980111274, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Under Voltage Fault" }, { "date": 1545768504078, "active": false, "location": "Jameson Field", "device": "Pentair Aurora", "details": "Over Voltage Fault" }, { "date": 1545124209799, "active": false, "location": "Parker Field West", "device": "Pentair Aurora", "details": "Under Current Fault" }, { "date": 1545822693218, "active": false, "location": "Dos Valley Field", "device": "PXL DG1", "details": "Under Voltage Fault" }, { "date": 1545167308761, "active": true, "location": "Jameson Field", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1545732452179, "active": false, "location": "Dos Valley Field", "device": "Pentair Aurora", "details": "Under Voltage Fault" }, { "date": 1545846972700, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Under Voltage Fault" }];
-    register.state={
-        alarmList: data,
-        activeFilter: 'events'
-      }
-      register.filterAlarams('events')
-      expect(register.resetFilter).toHaveBeenCalled();
-      expect(register.state.activeFilter).toBeNull(); 
+
+it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
 });
 
-it('allows to display all active-alarms', () => {
- 
-    const register= shallow(<AlarmList></AlarmList>).dive().instance();
-    const spy = spyOn(register, 'resetFilter').and.callThrough();
-    const data = [{ "date": 1545428583069, "active": false, "location": "Parker Field West", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1544988929886, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1545414474034, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1544980111274, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Under Voltage Fault" }, { "date": 1545768504078, "active": false, "location": "Jameson Field", "device": "Pentair Aurora", "details": "Over Voltage Fault" }, { "date": 1545124209799, "active": false, "location": "Parker Field West", "device": "Pentair Aurora", "details": "Under Current Fault" }, { "date": 1545822693218, "active": false, "location": "Dos Valley Field", "device": "PXL DG1", "details": "Under Voltage Fault" }, { "date": 1545167308761, "active": true, "location": "Jameson Field", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1545732452179, "active": false, "location": "Dos Valley Field", "device": "Pentair Aurora", "details": "Under Voltage Fault" }, { "date": 1545846972700, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Under Voltage Fault" }];
-    register.state={
+it('sorts events correctly', () => {
+    const wrapper= shallow(<App></App>).dive().instance();
+    const data = [
+        {type: 'alarm', date: 0, active: 0},
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'settings', date: 4},
+        {type: 'session', date: 8}
+    ];
+    const sortedTime = [
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'session', date: 8},
+        {type: 'settings', date: 4},
+        {type: 'alarm', date: 0, active: 0}
+    ];
+    const sortedType = [
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'alarm', date: 0, active: 0},
+        {type: 'session', date: 8},
+        {type: 'settings', date: 4}
+    ];
+    wrapper.state={
+        showMenu: false,
         alarmList: data,
-        activeFilter: 'ACTIVE_ALARMS'
-      }
-      register.filterAlarams('ACTIVE_ALARMS')
-      expect(register.resetFilter).toHaveBeenCalled();
-      expect(register.state.activeFilter).toBeNull(); 
+        currentSort: 'time'
+    }
+    let sorted = wrapper.sortedEvents();
+    expect(sorted).toEqual(sortedTime);
+    wrapper.setState({currentSort: 'type'});
+    sorted = wrapper.sortedEvents();
+    expect(sorted).toEqual(sortedType);
 });
 
-it('allows to display all alarms', () => {
- 
-    const register= shallow(<AlarmList></AlarmList>).dive().instance();
-    const spy = spyOn(register, 'resetFilter').and.callThrough();
-    const data = [{ "date": 1545428583069, "active": false, "location": "Parker Field West", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1544988929886, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1545414474034, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1544980111274, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Under Voltage Fault" }, { "date": 1545768504078, "active": false, "location": "Jameson Field", "device": "Pentair Aurora", "details": "Over Voltage Fault" }, { "date": 1545124209799, "active": false, "location": "Parker Field West", "device": "Pentair Aurora", "details": "Under Current Fault" }, { "date": 1545822693218, "active": false, "location": "Dos Valley Field", "device": "PXL DG1", "details": "Under Voltage Fault" }, { "date": 1545167308761, "active": true, "location": "Jameson Field", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1545732452179, "active": false, "location": "Dos Valley Field", "device": "Pentair Aurora", "details": "Under Voltage Fault" }, { "date": 1545846972700, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Under Voltage Fault" }];
-    register.state={
+it('filters events correctly', () => {
+    const wrapper= shallow(<App></App>).dive().instance();
+    const data = [
+        {type: 'alarm', date: 0, active: 0},
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'settings', date: 4},
+        {type: 'session', date: 8}
+    ];
+
+    // show all
+    const all = [
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'alarm', date: 0, active: 0},
+        {type: 'session', date: 8},
+        {type: 'settings', date: 4}
+    ];
+
+    // show alarms
+    const alarms = [
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'alarm', date: 0, active: 0}
+    ];
+
+    // show sessions
+    const sessions = [
+        {type: 'session', date: 8}
+    ];
+
+    // show settings and active alarms
+    const settingsandactive = [
+        {type: 'alarm', date: 10, active: 1},
+        {type: 'settings', date: 4}
+    ];
+
+    wrapper.state={
+        showMenu: false,
         alarmList: data,
-        activeFilter: 'ALARMS'
-      }
-      register.filterAlarams('ALARMS')
-      expect(register.resetFilter).toHaveBeenCalled();
-      expect(register.state.activeFilter).toBeNull(); 
+        currentSort: 'type',
+        showAlarms: true,
+        showActiveAlarms: true,
+        showEvents: true,
+        showSessions: true
+    }
+
+    // all
+    let sorted = wrapper.filteredEvents(wrapper.sortedEvents());
+    expect(sorted).toEqual(all);
+
+    // alarms
+    wrapper.setState({showAlarms: true, showActiveAlarms: true, showEvents: false, showSessions: false});
+    sorted = wrapper.filteredEvents(wrapper.sortedEvents());
+    expect(sorted).toEqual(alarms);
+
+    // sessions
+    wrapper.setState({showAlarms: false, showActiveAlarms: false, showEvents: false, showSessions: true});
+    sorted = wrapper.filteredEvents(wrapper.sortedEvents());
+    expect(sorted).toEqual(sessions);
+
+    // settings and active
+    wrapper.setState({showAlarms: false, showActiveAlarms: true, showEvents: true, showSessions: false});
+    sorted = wrapper.filteredEvents(wrapper.sortedEvents());
+    expect(sorted).toEqual(settingsandactive);
 });
-it('allows to display time', () => {
- 
-    const register= shallow(<AlarmList></AlarmList>).dive().instance();
-    const spy = spyOn(register, 'resetFilter').and.callThrough();
-    const data = [{ "date": 1545428583069, "active": false, "location": "Parker Field West", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1544988929886, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1545414474034, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1544980111274, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Under Voltage Fault" }, { "date": 1545768504078, "active": false, "location": "Jameson Field", "device": "Pentair Aurora", "details": "Over Voltage Fault" }, { "date": 1545124209799, "active": false, "location": "Parker Field West", "device": "Pentair Aurora", "details": "Under Current Fault" }, { "date": 1545822693218, "active": false, "location": "Dos Valley Field", "device": "PXL DG1", "details": "Under Voltage Fault" }, { "date": 1545167308761, "active": true, "location": "Jameson Field", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1545732452179, "active": false, "location": "Dos Valley Field", "device": "Pentair Aurora", "details": "Under Voltage Fault" }, { "date": 1545846972700, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Under Voltage Fault" }];
-    register.state={
-        alarmList: data,
-        activeFilter: 'time'
-      }
-      register.filterAlarams('time')
-      expect(register.resetFilter).toHaveBeenCalled();
-      expect(register.state.activeFilter).toBeNull(); 
-});
-
-it('allows time to be displayed', () => {
- 
-    const register= shallow(<AlarmList></AlarmList>).dive().instance();
-    const spy = spyOn(register, 'passData').and.callThrough();
-    const data = [{ "date": 1545428583069, "active": false, "location": "Parker Field West", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1544988929886, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Over Voltage Fault" }, { "date": 1545414474034, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1544980111274, "active": false, "location": "Jameson Field", "device": "MX Power Pro", "details": "Under Voltage Fault" }, { "date": 1545768504078, "active": false, "location": "Jameson Field", "device": "Pentair Aurora", "details": "Over Voltage Fault" }, { "date": 1545124209799, "active": false, "location": "Parker Field West", "device": "Pentair Aurora", "details": "Under Current Fault" }, { "date": 1545822693218, "active": false, "location": "Dos Valley Field", "device": "PXL DG1", "details": "Under Voltage Fault" }, { "date": 1545167308761, "active": true, "location": "Jameson Field", "device": "PXL DG1", "details": "Over Voltage Fault" }, { "date": 1545732452179, "active": false, "location": "Dos Valley Field", "device": "Pentair Aurora", "details": "Under Voltage Fault" }, { "date": 1545846972700, "active": false, "location": "Parker Field West", "device": "PXL DG1", "details": "Under Voltage Fault" }];
-    register.state={
-        alarmList: data,
-        activeFilter: 'events'
-      }
-      register.filterAlarams('time')
-      expect(register.passData).toHaveBeenCalled();
-      expect(register.state.activeFilter).toEqual('time');
-    
-});
-
-
-
-
-
-
-
- 
-

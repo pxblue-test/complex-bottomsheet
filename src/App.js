@@ -38,7 +38,7 @@ class AlarmList extends React.Component {
     super(props);
     this.state={
       showMenu: false,
-      alarmList: alarms,
+      alarmList: alarms(20),
       currentSort: 'time',
       showAlarms: true,
       showActiveAlarms: true,

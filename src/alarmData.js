@@ -50,4 +50,4 @@ function getAlarmList(count){
   return data;
 }
 
-export default getAlarmList(20);
+export default getAlarmList;
