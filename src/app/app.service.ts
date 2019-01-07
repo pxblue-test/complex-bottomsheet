@@ -69,7 +69,7 @@ export class AppService {
 
   sortAlarams(sortText) {
     if (sortText == this.activeSort) {
-      return;
+      return true;
     }
     switch (sortText) {
       case FiltersList.EVENT_TYPE:

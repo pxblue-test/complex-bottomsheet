@@ -1,8 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
 @import '~@pxblue/themes/angular/theme.scss';
 
-$custom-typography: mat-typography-config($font-family: 'OpenSans, Arial, Helvetica, sans-serif;');
-@include mat-core($custom-typography);
+// $custom-typography: mat-typography-config($font-family: 'OpenSans, Arial, Helvetica, sans-serif;');
+// @include mat-core($custom-typography);
 
 body { 
   margin: 0;
@@ -17,13 +16,14 @@ body {
   opacity: 0;
 }
 
-[flex-center]{
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-[text-center]{
+.list-items{
   text-align: center;
+}
+.mat-nav-list .list-items a{
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  min-width: 24%;
 }
 
 .mat-nav-list .footer-list .mat-list-item .mat-list-item-content{
@@ -41,10 +41,12 @@ body {
   padding: 15px;
   border-bottom: 1px solid #ccc;
 }
-// .footer-list .active,
-// .footer-list .active mat-icon{
-//   color: #083c6b
-// }
+.footer-list .active{ 
+  color: #007bc1;
+}
+.footer-list .active mat-icon{
+  color: inherit;
+}
 
 
 .footer-list h3{

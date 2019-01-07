@@ -1,24 +1,24 @@
 .alarm{
-    border-left: 4px solid;
+  border-left: 4px solid;
+  border-left-color: #ff3333;
+}
+.alarm .mat-icon{
+  padding-left: 0px;
+}
+mat-nav-list{
+  padding-top:0px;
+}
+mat-list-item{
+  border-left: 3px solid transparent;
+  box-sizing: border-box;
+  &.active{
     border-left-color: #ff3333;
-  }
-  .alarm .mat-icon{
-    padding-left: 0px;
-  }
-  mat-nav-list{
-    padding-top:0px;
-  }
-  mat-list-item{
-    border-left: 3px solid transparent;
-    box-sizing: border-box;
-    &.active{
-      border-left-color: #ff3333;
-      h4{
-        color: #ff3333;
-      }
-      mat-icon{
-        color: #ffffff;
-        background: #ff3333;
-      }
+    h4{
+      color: #ff3333;
+    }
+    mat-icon{
+      color: #ffffff;
+      background: #ff3333;
     }
   }
+}

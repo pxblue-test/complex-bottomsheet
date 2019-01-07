@@ -104,10 +104,38 @@ describe('BottomSheet', () => {
     expect(bottomSheetRef.dismiss).toBeTruthy();
   }));
 
-  it('filterData', async(() => {
+  it('filterData if active filters has the passed item', async(() => {
     let spy = spyOn(appService, 'filterAlarams').and.returnValue(null);
+    app.activefilters = ['events', 'time', 'session'];
     app.filterData('events'); 
     expect(appService.filterAlarams).toHaveBeenCalled();
+    expect(app.activefilters).toEqual(['time', 'session']);
+    expect(app.activefilters.length).toEqual(2);
   }));
 
+  it('filterData if active filters not having the passed item', async(() => {
+    let spy = spyOn(appService, 'filterAlarams').and.returnValue(null);
+    app.activefilters = ['time', 'session'];
+    app.filterData('events'); 
+    expect(appService.filterAlarams).toHaveBeenCalled();
+    expect(app.activefilters).toEqual(['time', 'session', 'events']);
+    expect(app.activefilters.length).toEqual(3);
+  }));
+
+  it('sortData', async(() => {
+    let spy = spyOn(appService, 'sortAlarams').and.returnValue(null);
+    app.sortData('time'); 
+    expect(appService.sortAlarams).toHaveBeenCalled();
+    expect(app.activeSort).toEqual('time');
+  }));
+
+  it('checkActive if active filters has the passed item', async(() => {
+    app.activefilters = ['events', 'time', 'session'];
+    expect(app.checkActive('time')).toBeTruthy();
+  }));
+
+  it('checkActive if active filters not having the passed item', async(() => {
+    app.activefilters = ['events', 'session'];
+    expect(app.checkActive('time')).toBeFalsy();
+  }));
 });

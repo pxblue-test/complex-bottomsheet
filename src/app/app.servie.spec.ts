@@ -1,7 +1,4 @@
 import { TestBed, ComponentFixture, inject, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
-import { Component, DebugElement } from "@angular/core";
-import { By } from "@angular/platform-browser";
 import { AppService } from './app.service';
 
 
@@ -21,60 +18,41 @@ describe('Service: AppService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('reserFilter', () => {
-    let spy = spyOn(service.dataSource, 'next').and.callThrough();
-    service.resetFilter();
-    expect(service.activeFilter).toBeNull();
-    service.dataSource.next(data);
-    expect(service.dataSource.next).toHaveBeenCalled();
-  });
-
   it('passData', () => {
     let spy = spyOn(service.dataSource, 'next').and.callThrough();
-    service.passData(data, 'events');
-    expect(service.activeFilter).toEqual('events');
+    service.passData(data, 'time');
+    expect(service.activeSort).toEqual('time');
     service.dataSource.next(data);
     expect(service.dataSource.next).toHaveBeenCalled();
   });
 
-  it('filterAlarams if filterText is equal to activeFilter', () => {
-    service.activeFilter = 'events';
-    service.filterAlarams('events');
-    expect(service.activeFilter).toEqual(null);
+  it('sortAlarams sortText filterText is equal to activeSort', () => {
+    service.activeSort = 'time';
+    service.sortAlarams('time');
+    expect(service.sortAlarams).toBeTruthy();
   });
 
-  it('filterAlarams if filterText is not equal to activeFilter and activeFilter is equal to eventType', () => {
+  it('sortAlarams sortText filterText is not equal to activeSort and activeSort is equal to eventType', () => {
     let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeFilter = 'events';
-    service.filterAlarams('eventType');
-    expect(service.newdata.length).toEqual(10);
+    service.activeSort = 'time';
+    service.sortAlarams('eventType');
     service.passData(service.newdata, 'eventType');
     expect(service.passData).toHaveBeenCalled();
   });
 
-  it('filterAlarams if filterText is not equal to activeFilter and activeFilter is equal to time', () => {
+  it('sortAlarams sortText filterText is not equal to activeSort and activeSort is equal to time', () => {
     let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeFilter = 'eventType';
-    service.filterAlarams('time');
-    expect(service.newdata.length).toEqual(10);
+    service.activeSort = 'eventType';
+    service.sortAlarams('time');
     service.passData(service.newdata, 'time');
     expect(service.passData).toHaveBeenCalled();
   });
 
-  it('filterAlarams if filterText is not equal to activeFilter and activeFilter is equal to activeAlarams', () => {
-    let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeFilter = 'eventType';
-    service.filterAlarams('activeAlarams');
-    service.passData(service.newdata, 'activeAlarams');
-    expect(service.passData).toHaveBeenCalled();
-  });
-
-  it('filterAlarams if filterText is not equal to activeFilter and activeFilter is equal to alarams', () => {
-    let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeFilter = 'eventType';
-    service.filterAlarams('alarams');
-    service.passData(service.newdata, 'alarams');
-    expect(service.passData).toHaveBeenCalled();
+  it('filterAlarams', () => {
+    let spy = spyOn(service.dataSource, 'next').and.returnValue(true);
+    service.filterAlarams(['events', 'session']);
+    expect(service.dataSource.next).toHaveBeenCalled();
+    expect(service.newdata).toBeDefined();
   });
 
 });

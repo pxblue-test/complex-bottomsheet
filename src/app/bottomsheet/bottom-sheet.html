@@ -1,7 +1,7 @@
 <mat-nav-list>
   <div class="footer-list">
     <h3>Sort by</h3>
-    <div flex-center text-center>
+    <div class="list-items">
       <a mat-list-item [class.active]="activeSort == filterTypes.TIME" (click)="sortData(filterTypes?.TIME)">
         <mat-icon mat-list-icon>access_time</mat-icon>
         <span mat-line  >Time</span>
@@ -14,14 +14,14 @@
   </div>
   <div class="footer-list">
     <h3>Filter by</h3>
-    <div flex-center text-center>
+    <div class="list-items">
       <a mat-list-item [class.active]="checkActive(filterTypes.ACTIVE_ALARAMS)" (click)="filterData(filterTypes.ACTIVE_ALARAMS)">
         <mat-icon mat-list-icon>notifications_active</mat-icon>
-        <span >Active <br>Alarms</span>
+        <span mat-line>Active Alarms</span>
       </a>
   <a mat-list-item [class.active]="checkActive(filterTypes.ALARAMS)" (click)="filterData(filterTypes.ALARAMS)">
         <mat-icon mat-list-icon>notifications</mat-icon>
-        <span>Alarms</span>
+        <span mat-line>Alarms</span>
       </a>
       <a mat-list-item  [class.active]="checkActive(filterTypes.SETTINGS)" (click)="filterData(filterTypes.SETTINGS)">
         <mat-icon mat-list-icon>settings</mat-icon>
