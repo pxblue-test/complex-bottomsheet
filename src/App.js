@@ -2,6 +2,7 @@ import React from 'react';
 import {
   AppBar,
   Avatar,
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -11,8 +12,9 @@ import {
   Toolbar,
   Typography 
 }from '@material-ui/core';
-import {Close, Menu, MoreVert, Notifications, NotificationsActive, AccessTime, Info} from '@material-ui/icons';
+import {Close, Menu, MoreVert, Notifications, NotificationsActive, AccessTime, Info, Settings, Update} from '@material-ui/icons';
 import Grid from '@material-ui/core/Grid';
+import IconToggle from './components/iconToggle';
 
 import { withStyles } from '@material-ui/core/styles';
 import * as PXBColors from '@pxblue/colors';
@@ -20,12 +22,15 @@ import './style.css';
 
 import alarms, {formatDate} from './alarmData';
 
-const FiltersList = {
-  ACTIVE_ALARMS : "activeAlarams",
-  ALARAMS : "alarams",
+const FILTERS = {
   TIME : "time",
-  EVENTS : "events",
-  EVENT_TYPE : "eventType"
+  TYPE : "type"
+}
+
+const TYPES = {
+  ALARM: 'alarm',
+  SESSION: 'session',
+  EVENT: 'settings'
 }
 
 class AlarmList extends React.Component {
@@ -34,67 +39,50 @@ class AlarmList extends React.Component {
     this.state={
       showMenu: false,
       alarmList: alarms,
-      activeFilter: 'events'
+      currentSort: 'time',
+      showAlarms: true,
+      showActiveAlarms: true,
+      showEvents: true,
+      showSessions: true
     }
   }
 
-  resetFilter = () => {
-    this.setState({alarmList: alarms, activeFilter: null});
-    this.closeBottomSheet();
-  }
-
-  passData = (data, filterText) => {
-    this.setState({alarmList: data, activeFilter: filterText});
-    this.closeBottomSheet();
-  }
-
-  filterAlarams = (filterText) => {
-    if (this.state.activeFilter === filterText) {
-      this.resetFilter();
-    } else {
-      switch (filterText) {
-        case FiltersList.ACTIVE_ALARMS:
-          this.newdata = alarms.filter((item) => item.active);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.ALARAMS:
-          this.newdata = alarms.filter((item) => !item.active);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.TIME:
-          this.newdata = [...alarms].sort((a, b) => a.date - b.date);
-          this.passData(this.newdata, filterText);
-          break;
-        case FiltersList.EVENTS:
-          this.resetFilter();
-          this.setState({activeFilter: filterText});
-          break;
-        case FiltersList.EVENT_TYPE:
-          this.newdata = [...alarms].sort((a, b) => {
-            const itemA = a.details.toUpperCase();
-            const itemB = b.details.toUpperCase();
-            let comparison = 0;
-            if (itemA > itemB) {
-              comparison = 1;
-            } else if (itemA < itemB) {
-              comparison = -1;
+  sortedEvents(){
+    switch(this.state.currentSort){
+      case FILTERS.TYPE:
+        return this.state.alarmList.sort((a, b) => {
+          // primary sort by type
+          if(a.type < b.type) { return -1;}
+          else if(a.type > b.type){ return 1;}
+          else{
+            // secondary sort by alarm active and/or date 
+            if(a.type !== TYPES.ALARM){ return b.date - a.date;}
+            else{
+              if(a.active && !b.active){ return -1;}
+              else if(b.active && !a.active){ return 1;}
+              else{ return b.date - a.date}
             }
-            return comparison;
-          });
-          this.passData(this.newdata, filterText);
-          break;
-          default:
-          break;
-      }
+          }
+        });
+      case FILTERS.TIME:
+      default:
+        return this.state.alarmList.sort((a, b) => b.date - a.date);
     }
   }
 
-  closeBottomSheet = () => {
-    this.setState({showMenu: false});
+  filteredEvents(events){
+    return events.filter((item) => {
+      if(!this.state.showActiveAlarms && item.type===TYPES.ALARM && item.active){return false}
+      if(!this.state.showAlarms && item.type===TYPES.ALARM && !item.active){return false}
+      if(!this.state.showEvents && item.type===TYPES.EVENT){return false}
+      if(!this.state.showSessions && item.type===TYPES.SESSION){return false}
+      return true;
+    });
   }
 
   render() {
     const {classes} = this.props;
+    let alarmList = this.filteredEvents(this.sortedEvents());
     return (
       <React.Fragment>
         <AppBar position="fixed">
@@ -113,10 +101,13 @@ class AlarmList extends React.Component {
         </AppBar>
         <List className={classes.list}>
           {
-            this.state.alarmList.map((item, i) => (
+            alarmList.map((item, i) => (
                 <ListItem key={'item_' + i} className={classes.alarmRow + ' ' + (item.active ? classes.active : '')} >
                   <Avatar className={classes.avatar + ' ' + (item.active ? classes.active : '')}>
-                    {item.active ? <NotificationsActive /> : <Notifications/> }
+                    {item.type === 'alarm' && item.active  && <NotificationsActive />}
+                    {item.type === 'alarm' && !item.active && <Notifications/> }
+                    {item.type === 'settings' && <Settings/> }
+                    {item.type === 'session' && <Update/> }
                   </Avatar>
                   <ListItemText 
                     secondary={formatDate(item.date)} 
@@ -128,6 +119,8 @@ class AlarmList extends React.Component {
             )
           }
         </List>
+
+        {/* Custom/Complex Bottom Sheet Definition */}
         <Drawer 
             anchor={'bottom'}
             transitionDuration={250}
@@ -136,42 +129,50 @@ class AlarmList extends React.Component {
             className={classes.drawer}
             classes={{paper: classes.paper}}
         >
-          <div className={classes.footerList}>
-            <Typography variant="h6" gutterBottom>Sort by</Typography>
-            <Grid container spacing={0}>
-              <Grid item xs={4} className={`${classes.col} ${this.state.activeFilter === FiltersList.TIME ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.TIME) }>
-                  <AccessTime />
-                  <Typography color="inherit">Time</Typography>
-              </Grid>
-              <Grid item xs={4} className={`${classes.col} ${this.state.activeFilter === FiltersList.EVENT_TYPE ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.EVENT_TYPE) }>
-                  <Info />
-                  <Typography color="inherit">Event Type</Typography>
-              </Grid>
-            </Grid>
-          </div>
-          <div className={classes.footerList}>
-            <Typography variant="h6" gutterBottom>Filter by</Typography>
-            <Grid container spacing={0}>
-              <Grid item xs={3} className={`${classes.col} ${this.state.activeFilter === FiltersList.ACTIVE_ALARMS ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.ACTIVE_ALARMS) }>
-                  <NotificationsActive />
-                  <Typography color="inherit">Active Alarams</Typography>
-              </Grid>
-              <Grid item xs={3} className={`${classes.col} ${this.state.activeFilter === FiltersList.ALARAMS ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.ALARAMS) }>
-                  <Notifications />
-                  <Typography color="inherit">Alarms</Typography>
-              </Grid>
-              <Grid item xs={3} className={`${classes.col} ${this.state.activeFilter === FiltersList.EVENTS ? classes.activeText: null}`} onClick={ this.filterAlarams.bind(this, FiltersList.EVENTS)}>
-                  <Info />
-                  <Typography color="inherit">Events</Typography>
-              </Grid>
-            </Grid>
-          </div>
           <List style={{padding: 0}}>
-            <ListItem className={classes.row} onClick={ this.closeBottomSheet}>
-              <ListItemIcon><Close /></ListItemIcon>
-              <ListItemText primary={'Cancel'} />
+            <ListItem className={classes.sheetListItem}>
+              <Typography variant="body1" gutterBottom>Sort By:</Typography>
+              <Grid container spacing={0} alignItems={'center'} justify={'center'}>
+                <IconToggle iconComponent={<AccessTime/>} label="Time" onClick={() => this.setState({currentSort: FILTERS.TIME})} active={this.state.currentSort === FILTERS.TIME}/>
+                <IconToggle iconComponent={<Info/>} label="Type" onClick={() => this.setState({currentSort: FILTERS.TYPE})} active={this.state.currentSort === FILTERS.TYPE}/>
+              </Grid>
             </ListItem>
-          </List>
+            <Divider/>
+            <ListItem className={classes.sheetListItem}>
+              <Typography variant="body1" gutterBottom>Show:</Typography>
+              <Grid container spacing={0} alignItems={'center'} justify={'center'}>
+                <IconToggle
+                  iconComponent={<NotificationsActive/>} 
+                  label="Active Alarms" 
+                  onClick={() => this.setState({showActiveAlarms: !this.state.showActiveAlarms})} 
+                  active={this.state.showActiveAlarms}
+                />
+                <IconToggle xs={3}
+                  iconComponent={<Notifications/>} 
+                  label="Alarms" 
+                  onClick={() => this.setState({showAlarms: !this.state.showAlarms})} 
+                  active={this.state.showAlarms}
+                />
+                <IconToggle xs={3}
+                  iconComponent={<Settings/>} 
+                  label="Settings" 
+                  onClick={() => this.setState({showEvents: !this.state.showEvents})} 
+                  active={this.state.showEvents}
+                />
+                <IconToggle xs={3}
+                  iconComponent={<Update/>} 
+                  label="Sessions" 
+                  onClick={() => this.setState({showSessions: !this.state.showSessions})} 
+                  active={this.state.showSessions}
+                />
+              </Grid>
+            </ListItem>
+            <Divider/>
+            <ListItem className={classes.row} onClick={() => this.setState({showMenu: false})}>
+              <ListItemIcon><Close /></ListItemIcon>
+              <ListItemText primary={'Close'} />
+            </ListItem>
+          </List>        
         </Drawer>
       </React.Fragment>
     );
@@ -211,27 +212,20 @@ const styles = theme => ({
     width: '100%',
     maxWidth: 600,
     margin: 'auto',
-    userSelect: 'none',
-    cursor: 'pointer'
+    userSelect: 'none'
+  },
+  sheetListItem:{
+    width: '100%', 
+    flexDirection: 'column',
+    alignItems: 'flex-start'
   },
   row:{
+    cursor: 'pointer',
     width: '100%',
     '&:hover':{
       backgroundColor: PXBColors.gray['50']
     }
-  },
-  footerList: {
-    flexGrow: 1,
-    padding: '15px',
-    borderBottom: '1px solid #ccc'
-  },
-  col: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    '&:hover':{
-      backgroundColor: PXBColors.gray['50']
-    }
-  },
+  }
 })
 
 export default withStyles(styles)(AlarmList);

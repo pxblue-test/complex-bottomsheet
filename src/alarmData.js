@@ -1,4 +1,5 @@
 const NOW = Date.now();
+const TYPES = ['alarm', 'settings', 'session'];
 const LOCATIONS = ['Dos Valley Field', 'Jameson Field', 'Parker Field West', 'Parker Field East', 'North Park Garden'];
 const DEVICES = ['MX Power Pro', 'PXL DG1', 'Pentair Aurora'];
 const DETAILS = ['Over Voltage Fault', 'Over Current Fault', 'Under Voltage Fault', 'Under Current Fault'];
@@ -9,13 +10,35 @@ export function formatDate(timestamp){
 }
 
 function getRandomData(){
-//   const date = Math.round(NOW - Math.random()*1000000);
-  return {
-    date: Math.round(NOW - Math.random()*1000000000),
-    active: Math.random() < .3,
-    location: LOCATIONS[Math.floor(Math.random()*LOCATIONS.length)],
-    device: DEVICES[Math.floor(Math.random()*DEVICES.length)],
-    details: DETAILS[Math.floor(Math.random()*DETAILS.length)]
+  const date = Math.round(NOW - Math.random()*1000000);
+  const type = TYPES[Math.floor(Math.random()*TYPES.length)];
+  switch(type){
+    case 'alarm':
+      return {
+        date: Math.round(NOW - Math.random()*1000000000),
+        type: type,
+        active: Math.random() < .3,
+        location: LOCATIONS[Math.floor(Math.random()*LOCATIONS.length)],
+        device: DEVICES[Math.floor(Math.random()*DEVICES.length)],
+        details: DETAILS[Math.floor(Math.random()*DETAILS.length)]
+      }
+    case 'settings':
+      return {
+        date: Math.round(NOW - Math.random()*1000000000),
+        type: type,
+        location: LOCATIONS[Math.floor(Math.random()*LOCATIONS.length)],
+        device: DEVICES[Math.floor(Math.random()*DEVICES.length)],
+        details: 'Settings changed'
+      }
+    case 'session':
+    default:
+      return {
+        date: Math.round(NOW - Math.random()*1000000000),
+        type: type,
+        location: LOCATIONS[Math.floor(Math.random()*LOCATIONS.length)],
+        device: DEVICES[Math.floor(Math.random()*DEVICES.length)],
+        details: 'Run Session'
+      }
   }
 }
 
@@ -27,4 +50,4 @@ function getAlarmList(count){
   return data;
 }
 
-export default getAlarmList(10);
+export default getAlarmList(20);
