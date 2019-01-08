@@ -26,31 +26,31 @@ describe('Service: AppService', () => {
     expect(service.dataSource.next).toHaveBeenCalled();
   });
 
-  it('sortAlarams sortText filterText is equal to activeSort', () => {
+  it('sortAlarms sortText filterText is equal to activeSort', () => {
     service.activeSort = 'time';
-    service.sortAlarams('time');
-    expect(service.sortAlarams).toBeTruthy();
+    service.sortAlarms('time');
+    expect(service.sortAlarms).toBeTruthy();
   });
 
-  it('sortAlarams sortText filterText is not equal to activeSort and activeSort is equal to eventType', () => {
+  it('sortAlarms sortText filterText is not equal to activeSort and activeSort is equal to eventType', () => {
     let spy = spyOn(service, 'passData').and.returnValue(true);
     service.activeSort = 'time';
-    service.sortAlarams('eventType');
+    service.sortAlarms('eventType');
     service.passData(service.newdata, 'eventType');
     expect(service.passData).toHaveBeenCalled();
   });
 
-  it('sortAlarams sortText filterText is not equal to activeSort and activeSort is equal to time', () => {
+  it('sortAlarms sortText filterText is not equal to activeSort and activeSort is equal to time', () => {
     let spy = spyOn(service, 'passData').and.returnValue(true);
     service.activeSort = 'eventType';
-    service.sortAlarams('time');
+    service.sortAlarms('time');
     service.passData(service.newdata, 'time');
     expect(service.passData).toHaveBeenCalled();
   });
 
-  it('filterAlarams', () => {
+  it('filterAlarms', () => {
     let spy = spyOn(service.dataSource, 'next').and.returnValue(true);
-    service.filterAlarams(['events', 'session']);
+    service.filterAlarms(['events', 'session']);
     expect(service.dataSource.next).toHaveBeenCalled();
     expect(service.newdata).toBeDefined();
   });

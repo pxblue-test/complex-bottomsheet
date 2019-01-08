@@ -1,6 +1,6 @@
 export enum FiltersList {
-  ACTIVE_ALARAMS = "activeAlarams",
-  ALARAMS = "alarams",
+  ACTIVE_ALARMS = "activeAlarms",
+  ALARMS = "alarms",
   TIME = "time",
   SETTINGS = "settings",
   EVENT_TYPE = "eventType",

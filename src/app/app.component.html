@@ -11,13 +11,13 @@
 </mat-toolbar>
 <mat-nav-list style="padding-top:56px;" *ngIf="data.length > 0">
 	<mat-list-item *ngFor="let i of data; let index = index;" [class.active]="i.active">  
-		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarams' && !i.active">notifications</mat-icon>
-		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarams' && i.active">notifications_active</mat-icon>
+		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarms' && !i.active">notifications</mat-icon>
+		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarms' && i.active">notifications_active</mat-icon>
     <mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
     <mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
-		<h4 mat-line style="font-weight: bold; margin-bottom: 5px;">
-      <ng-container *ngIf="i.active">'ACTIVE: '</ng-container> {{ i.details }}
-		</h4> 
+		<h5 mat-line style="font-weight: 600; margin-bottom: 5px;">
+      <ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
+		</h5> 
 		<p mat-line>
 			{{ i.date | date: 'dd/MM/yyyy' }} 
 		</p>

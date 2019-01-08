@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { MatBottomSheetRef} from '@angular/material';
 import { AppService } from '../app.service';
 import { FiltersList } from '../filter';
 
 @Component({
   selector: 'bottom-sheet',
   templateUrl: './bottom-sheet.html',
-  styleUrls: [],
+  styleUrls: ['./bottom-sheet.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class BottomSheet {
 
@@ -20,7 +21,7 @@ export class BottomSheet {
     this.activefilters = this.appService.activeFilters;
     this.filterTypes = FiltersList;
     this.activeSort = this.appService.activeSort;
-    this.appService.sortAlarams(this.activeSort);
+    this.appService.sortAlarms(this.activeSort);
     console.log(this.activefilters)
   }
 
@@ -35,12 +36,12 @@ export class BottomSheet {
     }else{
       this.activefilters.push(filter);
     }
-    this.appService.filterAlarams(this.activefilters);
+    this.appService.filterAlarms(this.activefilters);
   }
 
   sortData(sortText){
     this.activeSort = sortText;
-    this.appService.sortAlarams(sortText);
+    this.appService.sortAlarms(sortText);
   }
 
   checkActive(filter){
