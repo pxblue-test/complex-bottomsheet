@@ -2,35 +2,47 @@
   <div class="footer-list">
     <h3>Sort by</h3>
     <div class="list-items">
-      <a mat-list-item [class.active]="activeSort == filterTypes.TIME" (click)="sortData(filterTypes?.TIME)">
+      <a [class.active]="activeSort == filterTypes.TIME" (click)="sortData(filterTypes?.TIME)">
+        <button mat-icon-button>
         <mat-icon mat-list-icon>access_time</mat-icon>
-        <span mat-line  >Time</span>
+        </button>
+        <span mat-line style="display: block;" >Time</span>
       </a>
-      <a mat-list-item [class.active]="activeSort == filterTypes.EVENT_TYPE" (click)="sortData(filterTypes.EVENT_TYPE)">
-        <mat-icon mat-list-icon>info</mat-icon>
-        <span mat-line> Type</span>
+      <a [class.active]="activeSort == filterTypes.EVENT_TYPE" (click)="sortData(filterTypes.EVENT_TYPE)">
+        <button mat-icon-button>
+        <mat-icon mat-list-icon >info</mat-icon>
+        </button>
+        <span mat-line  style="display: block;"> Type</span>
       </a>
     </div>
   </div>
   <div class="footer-list">
     <h3>Show:</h3>
     <div class="list-items">
-      <a mat-list-item [class.active]="checkActive(filterTypes.ACTIVE_ALARMS)" (click)="filterData(filterTypes.ACTIVE_ALARMS)">
+      <a [class.active]="checkActive(filterTypes.ACTIVE_ALARMS)" (click)="filterData(filterTypes.ACTIVE_ALARMS)">
+        <button mat-icon-button>
         <mat-icon mat-list-icon>notifications_active</mat-icon>
-        <span mat-line>Active Alarms</span>
+        </button>
+        <span mat-line style="display: block;">Active Alarms</span>
       </a>
-  <a mat-list-item [class.active]="checkActive(filterTypes.ALARMS)" (click)="filterData(filterTypes.ALARMS)">
+  <a [class.active]="checkActive(filterTypes.ALARMS)" (click)="filterData(filterTypes.ALARMS)">
+    <button mat-icon-button>
         <mat-icon mat-list-icon>notifications</mat-icon>
-        <span mat-line>Alarms</span>
+    </button>
+        <span mat-line style="display: block;">Alarms</span>
       </a>
-      <a mat-list-item  [class.active]="checkActive(filterTypes.SETTINGS)" (click)="filterData(filterTypes.SETTINGS)">
+      <a  [class.active]="checkActive(filterTypes.SETTINGS)" (click)="filterData(filterTypes.SETTINGS)">
+        <button mat-icon-button>
         <mat-icon mat-list-icon>settings</mat-icon>
-        <span mat-line>Settings </span>
+        </button>
+        <span mat-line style="display: block;">Settings </span>
       </a>
 
-       <a mat-list-item [class.active]="checkActive(filterTypes.SESSION)" (click)="filterData(filterTypes.SESSION)">
+       <a [class.active]="checkActive(filterTypes.SESSION)" (click)="filterData(filterTypes.SESSION)">
+         <button mat-icon-button>
         <mat-icon mat-list-icon>update</mat-icon>
-        <span mat-line> Sessions</span>
+         </button>
+        <span mat-line style="display: block;"> Sessions</span>
       </a>
     </div>
   </div>
