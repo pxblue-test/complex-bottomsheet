@@ -22,7 +22,6 @@ export class BottomSheet {
     this.filterTypes = FiltersList;
     this.activeSort = this.appService.activeSort;
     this.appService.sortAlarms(this.activeSort);
-    console.log(this.activefilters)
   }
 
   openLink(): void {

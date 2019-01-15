@@ -1,44 +1,35 @@
-.vert-btn.mat-icon-button.cdk-program-focused .mat-button-focus-overlay{
-  opacity: 0;
+.bottomPanel{
+  min-width: 600px;
+  width: 100%;
+  max-width: 600px;
+  padding: 0;
+  .mat-nav-list{
+    padding: 0;
+  }
+  a{
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    &.active{
+      color: #007bc1;
+    }
+  }
+  .footer-list{
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+  }
+  h3{
+    margin: 0;
+  }
 }
 
-.list-items{
-  text-align: center;
-}
-.mat-nav-list .list-items a{
-  display: inline-block;
-  vertical-align: middle;
-  width: 24%;
-}
-.footer-list{
-  padding: 15px;
-  border-bottom: 1px solid #ccc;
-}
-.footer-list .active{ 
-  color: #007bc1;
-}
-.footer-list h3{
-  margin: 0 0 10px;
-}
-.mat-bottom-sheet-container{
-  min-width: 600px !important;
-  max-width:600px !important;
-}
 @media (max-width: 600px) {
-  .mat-bottom-sheet-container{
-    min-width: 100vw !important;
-  }
-  .mat-nav-list mat-list-item .mat-line{
-    text-overflow: inherit !important;
-    white-space: normal !important;
-  }
-  .mat-toolbar-single-row{
-    white-space: normal !important;
-    height: auto !important;
-    min-height: 65px;
-  }
-  .mat-nav-list .list-items a{
-    width: auto;
-    min-width: 24%;
+  .bottomPanel{
+    min-width: 100vw;
+
+    .mat-nav-list mat-list-item .mat-line{
+      text-overflow: inherit;
+      white-space: normal;
+    }
   }
 }

@@ -3,6 +3,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 import {BottomSheet} from './bottomsheet/bottom-sheet';
 import {A11yModule} from '@angular/cdk/a11y';
 import {BidiModule} from '@angular/cdk/bidi';
@@ -104,7 +106,8 @@ export class MaterialModule {}
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
     entryComponents: [BottomSheet],
   declarations: [AppComponent,BottomSheet ],
