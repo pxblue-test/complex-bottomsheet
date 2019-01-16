@@ -16,36 +16,12 @@ import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {
-  MatAutocompleteModule,
   MatBottomSheetModule,
   MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
   MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
   MatIconModule,
-  MatInputModule,
   MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule
+  MatToolbarModule
 } from '@angular/material';
 
 import {AppComponent} from './app.component';
@@ -65,35 +41,11 @@ import { AppService } from './app.service';
     CdkTableModule,
     
     // Material
-    MatAutocompleteModule,
     MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
     MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
     MatIconModule,
-    MatInputModule,
     MatListModule,
-    MatMenuModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatStepperModule,
-    MatTableModule,
-    MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
-    MatNativeDateModule,
     MatBottomSheetModule,
   ]
 })
