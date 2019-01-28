@@ -10,7 +10,6 @@ export function formatDate(timestamp){
 }
 
 function getRandomData(){
-  const date = Math.round(NOW - Math.random()*1000000);
   const type = TYPES[Math.floor(Math.random()*TYPES.length)];
   switch(type){
     case 'alarm':

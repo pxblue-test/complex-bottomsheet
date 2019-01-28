@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { IconButton, Button, Typography } from '@material-ui/core';
-import {Settings} from '@material-ui/icons';
+import { IconButton, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import * as PXBColors from '@pxblue/colors';
 
