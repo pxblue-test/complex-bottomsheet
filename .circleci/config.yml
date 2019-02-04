@@ -1,14 +1,14 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/search-bar
+    working_directory: ~/complex-bottomsheet
     docker:
       - image: circleci/node:8
     steps:
       - checkout
-      - run: yarn install
+      - run: 
+          name: Install dependencies
+          command: yarn 
       - run:
-          name: jest tests
-          command: |
-            mkdir -p test-results/jest
-            yarn run test
+          name: Test React 
+          command: yarn test
