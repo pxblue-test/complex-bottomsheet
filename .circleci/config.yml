@@ -1,9 +1,14 @@
 version: 2
 jobs:
   build:
-    docker: 
-      - image: node:7.4.0
+    working_directory: ~/search-bar
+    docker:
+      - image: circleci/node:8
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
+      - run: yarn install
+      - run:
+          name: jest tests
+          command: |
+            mkdir -p test-results/jest
+            yarn run test
