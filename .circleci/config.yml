@@ -1,9 +1,14 @@
 version: 2
 jobs:
   build:
-    docker: 
-      - image: node:7.4.0
+    working_directory: ~/complex-bottomsheet
+    docker:
+      - image: circleci/node:8
     steps:
       - checkout
-      - run: npm install
-      - run: npm test
+      - run: 
+          name: Install dependencies
+          command: yarn 
+      - run:
+          name: Test React 
+          command: yarn test
