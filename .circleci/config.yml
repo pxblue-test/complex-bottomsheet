@@ -2,13 +2,21 @@ version: 2
 jobs:
   build:
     working_directory: ~/complex-bottomsheet
-    docker:
-      - image: circleci/node:8
+    docker: 
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: 
-          name: Install dependencies
-          command: yarn 
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: Test React 
-          command: yarn test
+          name: Install Dependencies
+          command: yarn install
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache
+            - ./node_modules
+      - run:
+          name: Install Dependencies
+          command: yarn install
+      - run: yarn test
