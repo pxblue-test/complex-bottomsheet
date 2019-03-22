@@ -23,6 +23,6 @@ You can then run the example - this will launch the application in your browser:
 yarn start
 ```
 
-All of our code examples can also be found on [Stackblitz](http://www.stackblitz.com/@px-blue), which allows you to make changes to a project and see the updates to the rendered applciation in real-time.
+All of our code examples can also be found on [Stackblitz](http://www.stackblitz.com/@px-blue), which allows you to make changes to a project and see the updates to the rendered application in real-time.
 - [Angular](https://stackblitz.com/edit/pxblue-complex-bottomsheet-angular)
 - [React](https://stackblitz.com/edit/pxblue-complex-bottomsheet-react)
