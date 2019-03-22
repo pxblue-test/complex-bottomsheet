@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/data-list
+    working_directory: ~/complex-bottomsheet
     docker:
       - image: circleci/node:8.11-browsers
     steps:
