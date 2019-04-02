@@ -1,21 +1,29 @@
 import React from 'react';
-import {
-  AppBar,
-  Avatar,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Typography 
-}from '@material-ui/core';
-import {Close, Menu, MoreVert, Notifications, NotificationsActive, AccessTime, Info, Settings, Update} from '@material-ui/icons';
-import Grid from '@material-ui/core/Grid';
-import IconToggle from './components/iconToggle';
 
+import AppBar from '@material-ui/core/AppBar';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+
+import Close from '@material-ui/icons/Close';
+import Menu from '@material-ui/icons/Menu';
+import MoreVert from '@material-ui/icons/MoreVert';
+import Notifications from '@material-ui/icons/Notifications';
+import NotificationsActive from '@material-ui/icons/NotificationsActive';
+import AccessTime from '@material-ui/icons/AccessTime';
+import Info from '@material-ui/icons/Info';
+import Settings from '@material-ui/icons/Settings';
+import Update from '@material-ui/icons/Update';
+
+import IconToggle from './components/iconToggle';
 import { withStyles } from '@material-ui/core/styles';
 import * as PXBColors from '@pxblue/colors';
 import './style.css';
