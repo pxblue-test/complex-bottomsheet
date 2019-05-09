@@ -1,25 +1,25 @@
-<mat-toolbar style="position: fixed;z-index: 4; " color="primary">
+<mat-toolbar data-cy="pxb-toolbar" style="position: fixed;z-index: 4; " color="primary">
 	<button mat-icon-button>
-      <mat-icon >menu</mat-icon>
-       </button>
-  <div>Complex Bottom Sheet</div>
+		<mat-icon>menu</mat-icon>
+	</button>
+	<div>Complex Bottom Sheet</div>
 	<div fxFlex style="margin:auto;"></div>
-   <button class="vert-btn"  #morevert mat-icon-button (click)="showBottomSheet()">
-        <mat-icon >more_vert</mat-icon>
-    </button>  
- 
+	<button data-cy="pxb-toolbar-menu" class="vert-btn" #morevert mat-icon-button (click)="showBottomSheet()">
+		<mat-icon>more_vert</mat-icon>
+	</button>
+
 </mat-toolbar>
 <mat-nav-list style="padding-top:56px;" *ngIf="data.length > 0">
-	<mat-list-item *ngFor="let i of data; let index = index;" [class.active]="i.active">  
+	<mat-list-item *ngFor="let i of data; let index = index;" [class.active]="i.active">
 		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarms' && !i.active">notifications</mat-icon>
 		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'alarms' && i.active">notifications_active</mat-icon>
-    <mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
-    <mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
+		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
+		<mat-icon style="padding: 8px" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
 		<h5 mat-line style="font-weight: 600; margin-bottom: 5px;">
-      <ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
-		</h5> 
+			<ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
+		</h5>
 		<p mat-line>
-			{{ i.date | date: 'MM/dd/yyyy' }} 
+			{{ i.date | date: 'MM/dd/yyyy' }}
 		</p>
 	</mat-list-item>
 </mat-nav-list>

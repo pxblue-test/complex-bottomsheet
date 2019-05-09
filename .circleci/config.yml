@@ -7,12 +7,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Install Dependencies
           command: yarn install
       - save_cache:
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ~/.cache/yarn
             - ./node_modules
@@ -27,3 +27,10 @@ jobs:
           prefix: tests
       - store_test_results:
           path: test-results
+      - run:
+          name: e2e cypress tests
+          command: yarn cytest
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
