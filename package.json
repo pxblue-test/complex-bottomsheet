@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cy:run": "cypress run",
+    "cypress:open": "cypress open",
+    "cytest": "start-server-and-test start http://localhost:4200 cy:run"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +41,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "cypress": "^3.2.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -46,6 +50,7 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
+    "start-server-and-test": "^1.9.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "^3.1.1"
