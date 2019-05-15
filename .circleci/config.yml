@@ -17,3 +17,10 @@ jobs:
             - ~/.cache
             - ./node_modules
       - run: yarn test
+      - run:
+          name: e2e cypress tests
+          command: yarn cytest
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
