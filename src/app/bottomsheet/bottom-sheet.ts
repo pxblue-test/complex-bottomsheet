@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MatBottomSheetRef} from '@angular/material';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppService } from '../app.service';
 import { FiltersList } from '../filter';
 
