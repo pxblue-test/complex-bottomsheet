@@ -27,10 +27,6 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
   MatBottomSheetModule,
   MatBottomSheet
 } from '@angular/material';
@@ -72,10 +68,6 @@ describe('AppComponent', () => {
         MatSlideToggleModule,
         MatSnackBarModule,
         MatStepperModule,
-        MatTableModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
         MatBottomSheetModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

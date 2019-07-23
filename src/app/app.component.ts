@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { VERSION } from '@angular/material';
+import { VERSION } from '@angular/material/core';
 import { BottomSheet } from './bottomsheet/bottom-sheet';
-import { MatBottomSheet } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppService } from './app.service';
 
 @Component({

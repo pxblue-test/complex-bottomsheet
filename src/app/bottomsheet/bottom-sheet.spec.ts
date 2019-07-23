@@ -27,10 +27,6 @@ import {
   MatSlideToggleModule,
   MatSnackBarModule,
   MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
   MatBottomSheetModule,
   MatBottomSheetRef
 } from '@angular/material';
@@ -73,16 +69,14 @@ describe('BottomSheet', () => {
         MatSlideToggleModule,
         MatSnackBarModule,
         MatStepperModule,
-        MatTableModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatTooltipModule,
         MatBottomSheetModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      providers: [AppService, {provide: MatBottomSheetRef, useValue: {
-        dismiss: (dialogResult: any) => { }
-      }}]
+      providers: [AppService, {
+        provide: MatBottomSheetRef, useValue: {
+          dismiss: (dialogResult: any) => { }
+        }
+      }]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(BottomSheet);
       app = fixture.debugElement.componentInstance;
@@ -99,7 +93,7 @@ describe('BottomSheet', () => {
 
   it('openLink', async(() => {
     let spy = spyOn(bottomSheetRef, 'dismiss').and.returnValue(true);
-    app.openLink(); 
+    app.openLink();
     expect(bottomSheetRef.dismiss).toHaveBeenCalled();
     expect(bottomSheetRef.dismiss).toBeTruthy();
   }));
@@ -107,7 +101,7 @@ describe('BottomSheet', () => {
   it('filterData if active filters has the passed item', async(() => {
     let spy = spyOn(appService, 'filterAlarms').and.returnValue(null);
     app.activefilters = ['events', 'time', 'session'];
-    app.filterData('events'); 
+    app.filterData('events');
     expect(appService.filterAlarms).toHaveBeenCalled();
     expect(app.activefilters).toEqual(['time', 'session']);
     expect(app.activefilters.length).toEqual(2);
@@ -116,7 +110,7 @@ describe('BottomSheet', () => {
   it('filterData if active filters not having the passed item', async(() => {
     let spy = spyOn(appService, 'filterAlarms').and.returnValue(null);
     app.activefilters = ['time', 'session'];
-    app.filterData('events'); 
+    app.filterData('events');
     expect(appService.filterAlarms).toHaveBeenCalled();
     expect(app.activefilters).toEqual(['time', 'session', 'events']);
     expect(app.activefilters.length).toEqual(3);
@@ -124,7 +118,7 @@ describe('BottomSheet', () => {
 
   it('sortData', async(() => {
     let spy = spyOn(appService, 'sortAlarms').and.returnValue(null);
-    app.sortData('time'); 
+    app.sortData('time');
     expect(appService.sortAlarms).toHaveBeenCalled();
     expect(app.activeSort).toEqual('time');
   }));
