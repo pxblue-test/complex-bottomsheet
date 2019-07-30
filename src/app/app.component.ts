@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.appService.list.subscribe((list)=> this.data = list);
+    this.appService.list.subscribe((list) => this.data = list);
   }
 
   showBottomSheet(): void {
