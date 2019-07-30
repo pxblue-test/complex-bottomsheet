@@ -19,9 +19,8 @@ export class BottomSheet {
 
   ngOnInit(){
     this.activefilters = this.appService.activeFilters;
-    this.filterTypes = FiltersList;
     this.activeSort = this.appService.activeSort;
-    this.appService.sortAlarms(this.activeSort);
+    this.filterTypes = FiltersList;
   }
 
   openLink(): void {
@@ -35,12 +34,12 @@ export class BottomSheet {
     }else{
       this.activefilters.push(filter);
     }
-    this.appService.filterAlarms(this.activefilters);
+    this.appService.updateFilters(this.activefilters);
   }
 
   sortData(sortText){
     this.activeSort = sortText;
-    this.appService.sortAlarms(sortText);
+    this.appService.updateSort(sortText);
   }
 
   checkActive(filter){

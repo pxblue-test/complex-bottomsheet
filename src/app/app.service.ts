@@ -7,12 +7,11 @@ import { FiltersList } from './filter';
 
 export class AppService {
 
-  data: any[] = [];
+  fullData: any[] = [];
   activeFilters = ['settings', 'activeAlarms', 'alarms', 'session'];
-  public newdata = this.data;
-  activeSort;
+  activeSort = FiltersList.TIME;
 
-  private dataSource = new BehaviorSubject(this.data);
+  private dataSource = new BehaviorSubject(this.fullData);
   list = this.dataSource.asObservable();
 
   public NOW = Date.now();
@@ -23,13 +22,12 @@ export class AppService {
 
   constructor() {
     for (let i = 1; i <= 20; i++) {
-      this.data.push(this.getRandomData());
+      this.fullData.push(this.getRandomData());
     }
-    this.sortAlarms(FiltersList.TIME);
+    this.sortAlarms(this.fullData);
   }
 
   getRandomData() {
-    const date = Math.round(this.NOW - Math.random() * 1000000);
     const type = this.TYPES[Math.floor(Math.random() * this.TYPES.length)];
     switch (type) {
       case 'alarms':
@@ -62,18 +60,27 @@ export class AppService {
   }
 
 
-  passData(data, filterText) {
-    this.dataSource.next(data);
-    this.activeSort = filterText;
+  passData() {
+    this.dataSource.next(
+      this.sortAlarms(
+        this.filterAlarms(this.fullData)
+      )
+    );
   }
 
-  sortAlarms(sortText) {
-    if (sortText == this.activeSort) {
-      return;
-    }
-    switch (sortText) {
+  updateSort(sortType) {
+    this.activeSort = sortType;
+    this.passData();
+  }
+  updateFilters(filterList) {
+    this.activeFilters = filterList;
+    this.passData();
+  }
+
+  sortAlarms(data) {
+    switch (this.activeSort) {
       case FiltersList.EVENT_TYPE:
-        this.newdata = [...this.newdata].sort((a, b) => {
+        return data.sort((a, b) => {
           // primary sort by type
           if (a.type < b.type) { return -1; }
           else if (a.type > b.type) { return 1; }
@@ -87,26 +94,22 @@ export class AppService {
             }
           }
         });
-        this.passData(this.newdata, sortText);
-        break;
       case FiltersList.TIME:
-        this.newdata = [...this.newdata].sort((a, b) => b.date - a.date);
-        this.passData(this.newdata, sortText);
-        break;
+        return data.sort((a, b) => b.date - a.date);
     }
   }
 
-  filterAlarms(filterArray) {
-    let filterdata = [...this.newdata].filter((item) => {
+
+  filterAlarms(data) {
+    return data.filter((item) => {
       if (item.type == 'alarms' && !item.active) {
-        return (filterArray.indexOf('alarms') > -1) ? true : false;
+        return (this.activeFilters.indexOf('alarms') > -1) ? true : false;
       } else if (item.type == 'alarms' && item.active) {
-        return (filterArray.indexOf('activeAlarms') > -1) ? true : false;
+        return (this.activeFilters.indexOf('activeAlarms') > -1) ? true : false;
       } else {
-        return filterArray.indexOf(item.type) > -1;
+        return this.activeFilters.indexOf(item.type) > -1;
       }
     });
-    this.dataSource.next(filterdata);
   }
 
 } 

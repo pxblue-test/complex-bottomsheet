@@ -2,31 +2,9 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BottomSheet } from './bottom-sheet';
 import {
-  MatAutocompleteModule,
   MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatExpansionModule,
-  MatGridListModule,
   MatIconModule,
-  MatInputModule,
   MatListModule,
-  MatMenuModule,
-  MatNativeDateModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatStepperModule,
   MatBottomSheetModule,
   MatBottomSheetRef
 } from '@angular/material';
@@ -44,31 +22,9 @@ describe('BottomSheet', () => {
         BottomSheet
       ],
       imports: [
-        MatAutocompleteModule,
         MatButtonModule,
-        MatButtonToggleModule,
-        MatCardModule,
-        MatCheckboxModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatDialogModule,
-        MatExpansionModule,
-        MatGridListModule,
         MatIconModule,
-        MatInputModule,
         MatListModule,
-        MatMenuModule,
-        MatNativeDateModule,
-        MatProgressBarModule,
-        MatProgressSpinnerModule,
-        MatRadioModule,
-        MatRippleModule,
-        MatSelectModule,
-        MatSidenavModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatSnackBarModule,
-        MatStepperModule,
         MatBottomSheetModule
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -91,45 +47,39 @@ describe('BottomSheet', () => {
     expect(app).toBeTruthy();
   }));
 
-  it('openLink', async(() => {
+  it('updating filters should work', async(() => {
+    let spy = spyOn(appService, 'updateFilters').and.returnValue(null);
+    app.activefilters = [];
+    app.filterData('XX');
+    app.filterData('YY');
+    expect(appService.updateFilters).toHaveBeenCalled();
+    expect(app.activefilters).toContain('XX');
+    expect(app.activefilters).toContain('YY');
+    app.filterData('XX');
+    expect(appService.updateFilters).toHaveBeenCalled();
+    expect(app.activefilters).toContain('YY');
+    expect(app.activefilters).not.toContain('XX');
+  }));
+
+  it('updating sort should work', async(() => {
+    let spy = spyOn(appService, 'updateSort').and.returnValue(null);
+    app.activeSort = 'X';
+    app.sortData('Y');
+    expect(app.activeSort).toBe('Y');
+    expect(appService.updateSort).toHaveBeenCalled();
+  }));
+
+  it('check active should work', async(() => {
+    app.activefilters = [];
+    expect(app.checkActive('XX')).toBeFalsy();
+    app.filterData('XX');
+    expect(app.checkActive('XX')).toBeTruthy();
+  }));
+
+  it('closes bottomsheet correctly', async(() => {
     let spy = spyOn(bottomSheetRef, 'dismiss').and.returnValue(true);
     app.openLink();
     expect(bottomSheetRef.dismiss).toHaveBeenCalled();
     expect(bottomSheetRef.dismiss).toBeTruthy();
-  }));
-
-  it('filterData if active filters has the passed item', async(() => {
-    let spy = spyOn(appService, 'filterAlarms').and.returnValue(null);
-    app.activefilters = ['events', 'time', 'session'];
-    app.filterData('events');
-    expect(appService.filterAlarms).toHaveBeenCalled();
-    expect(app.activefilters).toEqual(['time', 'session']);
-    expect(app.activefilters.length).toEqual(2);
-  }));
-
-  it('filterData if active filters not having the passed item', async(() => {
-    let spy = spyOn(appService, 'filterAlarms').and.returnValue(null);
-    app.activefilters = ['time', 'session'];
-    app.filterData('events');
-    expect(appService.filterAlarms).toHaveBeenCalled();
-    expect(app.activefilters).toEqual(['time', 'session', 'events']);
-    expect(app.activefilters.length).toEqual(3);
-  }));
-
-  it('sortData', async(() => {
-    let spy = spyOn(appService, 'sortAlarms').and.returnValue(null);
-    app.sortData('time');
-    expect(appService.sortAlarms).toHaveBeenCalled();
-    expect(app.activeSort).toEqual('time');
-  }));
-
-  it('checkActive if active filters has the passed item', async(() => {
-    app.activefilters = ['events', 'time', 'session'];
-    expect(app.checkActive('time')).toBeTruthy();
-  }));
-
-  it('checkActive if active filters not having the passed item', async(() => {
-    app.activefilters = ['events', 'session'];
-    expect(app.checkActive('time')).toBeFalsy();
   }));
 });

@@ -1,5 +1,6 @@
 import { TestBed, ComponentFixture, inject, async } from '@angular/core/testing';
 import { AppService } from './app.service';
+import { FiltersList } from './filter';
 
 
 describe('Service: AppService', () => {
@@ -18,41 +19,52 @@ describe('Service: AppService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('passData', () => {
-    let spy = spyOn(service.dataSource, 'next').and.callThrough();
-    service.passData(data, 'time');
-    expect(service.activeSort).toEqual('time');
-    service.dataSource.next(data);
-    expect(service.dataSource.next).toHaveBeenCalled();
+  it('updateSort works', () => {
+    service.updateSort(FiltersList.EVENT_TYPE);
+    expect(service.activeSort).toBe(FiltersList.EVENT_TYPE);
   });
 
-  it('sortAlarms sortText filterText is equal to activeSort', () => {
-    service.activeSort = 'time';
-    service.sortAlarms('time');
-    expect(service.sortAlarms).toBeTruthy();
+  it('updateFilters works', () => {
+    service.updateFilters([FiltersList.ACTIVE_ALARMS]);
+    expect(service.activeFilters).toEqual([FiltersList.ACTIVE_ALARMS]);
+    service.updateFilters([FiltersList.ACTIVE_ALARMS, FiltersList.ALARMS]);
+    expect(service.activeFilters).toEqual([FiltersList.ACTIVE_ALARMS, FiltersList.ALARMS]);
+    service.updateFilters([]);
+    expect(service.activeFilters).toEqual([]);
   });
 
-  it('sortAlarms sortText filterText is not equal to activeSort and activeSort is equal to eventType', () => {
-    let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeSort = 'time';
-    service.sortAlarms('eventType');
-    service.passData(service.newdata, 'eventType');
-    expect(service.passData).toHaveBeenCalled();
-  });
+  it('sort works', () => {
+    const sampleData = [
+      {date: 1, type: 'C'},
+      {date: 3, type: 'B'},
+      {date: 2, type: 'A'}
+    ];
+    const sampleData_byTime = [
+      {date: 3, type: 'B'},
+      {date: 2, type: 'A'},
+      {date: 1, type: 'C'}
+    ];
+    const sampleData_byType = [
+      {date: 2, type: 'A'},
+      {date: 3, type: 'B'},
+      {date: 1, type: 'C'}
+    ];
+    service.updateSort(FiltersList.TIME);
+    expect(service.sortAlarms(sampleData)).toEqual(sampleData_byTime);
+    service.updateSort(FiltersList.EVENT_TYPE);
+    expect(service.sortAlarms(sampleData)).toEqual(sampleData_byType);
+  })
 
-  it('sortAlarms sortText filterText is not equal to activeSort and activeSort is equal to time', () => {
-    let spy = spyOn(service, 'passData').and.returnValue(true);
-    service.activeSort = 'eventType';
-    service.sortAlarms('time');
-    service.passData(service.newdata, 'time');
-    expect(service.passData).toHaveBeenCalled();
-  });
-
-  it('filterAlarms', () => {
-    let spy = spyOn(service.dataSource, 'next').and.returnValue(true);
-    service.filterAlarms(['events', 'session']);
-    expect(service.dataSource.next).toHaveBeenCalled();
-    expect(service.newdata).toBeDefined();
-  });
-
+  it('filter works', () => {
+    const sampleData = [
+      {date: 1, type: 'C'},
+      {date: 3, type: 'B'},
+      {date: 2, type: 'A'}
+    ];
+    service.updateFilters('A');
+    expect(service.filterAlarms(sampleData)).toEqual([{date: 2, type: 'A'}]);
+    service.updateFilters(['B','C']);
+    expect(service.filterAlarms(sampleData)).toEqual([{date: 1, type: 'C'},
+    {date: 3, type: 'B'}]);
+  })
 });
