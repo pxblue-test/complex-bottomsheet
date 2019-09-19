@@ -33,7 +33,7 @@
     "Safari 11"
   ],
   "devDependencies": {
-    "cypress": "^3.2.0",
+    "cypress": "^3.4.1",
     "start-server-and-test": "^1.9.0"
   }
 }
