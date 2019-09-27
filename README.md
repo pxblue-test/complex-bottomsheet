@@ -1,12 +1,12 @@
-# Complex-Bottomsheet Example
+# Complex Bottomsheet Example
 This project demonstrates how to build a complex bottomsheet. At the top of the page, the app bar has a 3dot icon on right. When clicking on 3dot icon bottomsheet slides up from bottom of the page, revealing filters that affect the whole page.
 
 | Framework           | Status       | Live Examples  |
 | ---------------- |--------------|------------------|
-| Angular | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular) | [View on Stackblitz](https://stackblitz.com/edit/pxblue-complex-bottomsheet-angular)
-| React | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react) | [View on Stackblitz](https://stackblitz.com/edit/pxblue-complex-bottomsheet-react)
-| Ionic | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic) | [View on Stackblitz](https://stackblitz.com/edit/pxblue-complex-bottomsheet-ionic)
-| React Native | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative) | [View on Snack](https://snack.expo.io/@px-blue/complex-bottomsheet-reactnative)
+| Angular | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular) | [View on Stackblitz](https://stackblitz.com/github/pxblue/complex-bottomsheet/tree/angular)
+| React | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react) | [View on Code Sandbox](https://codesandbox.io/s/github/pxblue/complex-bottomsheet/tree/react)
+| Ionic | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic) | [View on Stackblitz](https://stackblitz.com/github/pxblue/complex-bottomsheet/tree/ionic)
+| React Native | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative) | [View on Snack](https://snack.expo.io/@git/github.com/pxblue/complex-bottomsheet@reactnative)
 
 ## Running the Example
 ### Angular
@@ -33,6 +33,7 @@ yarn && ionic serve
 ```
 To run on a device, add the platform then build and run the project:
 ```
+ionic cordova resources
 ionic cordova platform add [android|ios]
 ionic cordova build [android|ios]
 ionic cordova run [android|ios]
