@@ -6,7 +6,7 @@ This project demonstrates how to build a complex bottomsheet. At the top of the 
 | Angular | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/angular) | [View on Stackblitz](https://stackblitz.com/github/pxblue/complex-bottomsheet/tree/angular)
 | React | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/react) | [View on Code Sandbox](https://codesandbox.io/s/github/pxblue/complex-bottomsheet/tree/react)
 | Ionic | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/ionic) | [View on Stackblitz](https://stackblitz.com/github/pxblue/complex-bottomsheet/tree/ionic)
-| React Native | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative) | [View on Snack](https://snack.expo.io/@git/github.com/pxblue/complex-bottomsheet@reactnative)
+| React Native | [![CircleCI](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative.svg?style=shield)](https://circleci.com/gh/pxblue/complex-bottomsheet/tree/reactnative) | [View on Snack](https://snack.expo.io/@git/github.com/pxblue/complex-bottomsheet@reactnative?preview=true&platform=ios)
 
 ## Running the Example
 ### Angular
