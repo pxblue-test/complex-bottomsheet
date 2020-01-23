@@ -2,7 +2,7 @@ import {
   Component,
   ViewEncapsulation
 } from '@angular/core';
-import { MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { DataService } from '../data.service';
 import { FiltersList } from '../filter';
 
