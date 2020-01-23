@@ -3,8 +3,7 @@ jobs:
   build:
     working_directory: ~/complex-bottomsheet
     docker:
-      # FOR IONIC node:10.9-browsers
-      # FOR ANGULAR, REACT, REACT-NATIVE node:12.6-browsers
+      # FOR ANGULAR, IONIC, REACT, REACT-NATIVE node:12.6-browsers
       - image: circleci/node:12.6-browsers
     steps:
       - checkout
