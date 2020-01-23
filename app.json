@@ -3,7 +3,7 @@
     "name": "pxblue-complex-bottomsheet-reactnative",
     "slug": "pxblue-complex-bottomsheet-reactnative",
     "privacy": "public",
-    "sdkVersion": "36.0.0",
+    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android",
