@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView, SafeAreaView, View, Text } from 'react-native';
 import * as Colors from '@pxblue/colors';
-import { Icon, ListItem, Divider } from 'react-native-elements';
+import { Divider, Icon, ListItem } from 'react-native-elements';
 import { Header, InfoListItem, wrapIcon } from '@pxblue/react-native-components';
 
 const MenuIcon = wrapIcon({ IconClass: Icon, name: 'menu' });
@@ -143,7 +143,7 @@ class Alarms extends React.Component<{}, AlarmsState> {
                     show={this.state.showBottomSheet}
                     >
                     <View style={styles.rowHeader}>
-                        <Text>Sort By: </Text>
+                        <Text style={styles.listHeader} >Sort By: </Text>
                         <View style={styles.row}>
                             <IconToggle IconComponent={AccessTimeIcon} active={this.state.currentSort === FILTERS.TIME} label={'Time'} onPress = {() => this.setState({ currentSort: FILTERS.TIME })}   > </IconToggle>
                             <IconToggle IconComponent={InfoIcon} active={this.state.currentSort === FILTERS.TYPE} label={'Type'} onPress = {() => this.setState({ currentSort: FILTERS.TYPE })}   > </IconToggle>
@@ -151,7 +151,7 @@ class Alarms extends React.Component<{}, AlarmsState> {
                     </View>
                     <Divider />
                     <View style={styles.rowHeader}>
-                        <Text>Show: </Text>
+                        <Text style={styles.listHeader} >Show: </Text>
                         <View style={styles.row}>
                             <IconToggle IconComponent={NotificatonsActiveIcon} active={this.state.showActiveAlarms} label={'Active Alarms'} onPress = {() => this.setState({ showActiveAlarms: !this.state.showActiveAlarms })}   > </IconToggle>
                             <IconToggle IconComponent={NotificatonsIcon} active={this.state.showAlarms} label={'Alarms'} onPress = {() => this.setState({ showAlarms: !this.state.showAlarms })}   > </IconToggle>
@@ -197,6 +197,9 @@ const styles = StyleSheet.create({
     },
     bottomSheetItemTitle: {
         paddingLeft: 16,
+    },
+    listHeader:{
+        fontSize: 17
     },
     overlay: {
         backgroundColor: Colors.black[900],
