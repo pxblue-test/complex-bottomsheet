@@ -2,15 +2,25 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FiltersList } from './filter';
 
+type alarmDataObject = {
+    date: number;
+    type: string;
+    active: boolean;
+    location: string;
+    device: string;
+    details: string;
+}
+
 @Injectable({
     providedIn: 'root',
 })
+
 export class DataService {
-    dataList: any[] = [];
+    dataList: alarmDataObject[] = [];
     activeFilters = ['settings', 'activeAlarms', 'alarms', 'session'];
     activeSort = FiltersList.TIME;
 
-    private dataSource = new BehaviorSubject(this.dataList);
+    private readonly dataSource = new BehaviorSubject(this.dataList);
     list = this.dataSource.asObservable();
 
     public NOW = Date.now();
@@ -32,7 +42,7 @@ export class DataService {
         this.dataList.sort((a, b) => b.date - a.date);
     }
 
-    getRandomData() {
+    getRandomData(): alarmDataObject {
         const date = Math.round(this.NOW - Math.random() * 1000000000);
         const type = this.TYPES[Math.floor(Math.random() * this.TYPES.length)];
         switch (type) {
@@ -63,23 +73,25 @@ export class DataService {
                     device: this.DEVICES[Math.floor(Math.random() * this.DEVICES.length)],
                     details: 'Run Session',
                 };
+            default:
+                return null
         }
     }
 
-    passData() {
+    passData(): void {
         this.dataSource.next(this.sortAlarms(this.filterAlarms(this.dataList)));
     }
 
-    updateSort(sortType) {
+    updateSort(sortType): void {
         this.activeSort = sortType;
         this.passData();
     }
-    updateFilters(filterList) {
+    updateFilters(filterList): void {
         this.activeFilters = filterList;
         this.passData();
     }
 
-    sortAlarms(data) {
+    sortAlarms(data): alarmDataObject[] {
         switch (this.activeSort) {
             case FiltersList.EVENT_TYPE:
                 return data.sort((a, b) => {
@@ -88,35 +100,37 @@ export class DataService {
                         return -1;
                     } else if (a.type > b.type) {
                         return 1;
-                    } else {
+                    } 
                         // secondary sort by alarm active and/or date
                         if (a.type !== 'alarms') {
                             return b.date - a.date;
-                        } else {
+                        } 
                             if (a.active && !b.active) {
                                 return -1;
                             } else if (b.active && !a.active) {
                                 return 1;
-                            } else {
+                            } 
                                 return b.date - a.date;
-                            }
-                        }
-                    }
+                            
+                        
+                    
                 });
             case FiltersList.TIME:
+                return data.sort((a, b) => b.date - a.date);
+            default:
                 return data.sort((a, b) => b.date - a.date);
         }
     }
 
-    filterAlarms(data) {
-        return data.filter(item => {
-            if (item.type == 'alarms' && !item.active) {
-                return this.activeFilters.indexOf('alarms') > -1 ? true : false;
-            } else if (item.type == 'alarms' && item.active) {
-                return this.activeFilters.indexOf('activeAlarms') > -1 ? true : false;
-            } else {
-                return this.activeFilters.indexOf(item.type) > -1;
-            }
+    filterAlarms(data): alarmDataObject[] {
+        return data.filter((item) => {
+            if (item.type === 'alarms' && !item.active) {
+                return this.activeFilters.includes('alarms') ? true : false;
+            } else if (item.type === 'alarms' && item.active) {
+                return this.activeFilters.includes('activeAlarms') ? true : false;
+            } 
+                return this.activeFilters.includes(item.type);
+            
         });
     }
 }

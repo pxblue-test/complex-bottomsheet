@@ -3,6 +3,15 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { DataService } from '../data.service';
 import { FiltersList } from '../filter';
 
+type filterDataObject = {
+    ACTIVE_ALARMS: string;
+    ALARMS:  string;
+    TIME: string;
+    SETTINGS: string;
+    EVENT_TYPE: string;
+    SESSION:  string;
+}
+
 @Component({
     selector: 'bottom-sheet',
     templateUrl: './bottomsheet.component.html',
@@ -11,23 +20,23 @@ import { FiltersList } from '../filter';
 })
 export class BottomsheetComponent {
     activefilters;
-    filterTypes: any;
+    filterTypes: filterDataObject;
     activeSort;
 
-    constructor(private bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>, private dataService: DataService) {}
+    constructor(private readonly bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>, private readonly dataService: DataService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.activefilters = this.dataService.activeFilters;
         this.activeSort = this.dataService.activeSort;
         this.filterTypes = FiltersList;
     }
 
     // this is the placeholder for actual functionality
-    openLink(event: MouseEvent): void {
+    openLink(): void {
         this.bottomSheetRef.dismiss();
     }
 
-    filterData(filter) {
+    filterData(filter): void {
         const index = this.activefilters.indexOf(filter);
         if (index > -1) {
             this.activefilters.splice(index, 1);
@@ -37,12 +46,12 @@ export class BottomsheetComponent {
         this.dataService.updateFilters(this.activefilters);
     }
 
-    sortData(sortText) {
+    sortData(sortText): void {
         this.activeSort = sortText;
         this.dataService.updateSort(sortText);
     }
 
-    checkActive(filter) {
+    checkActive(filter): boolean {
         return this.activefilters.indexOf(filter) > -1;
     }
 }

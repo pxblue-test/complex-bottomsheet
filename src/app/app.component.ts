@@ -17,20 +17,20 @@ export class AppComponent implements OnInit {
     Colors = Colors;
 
     constructor(
-        private bottomSheet: MatBottomSheet,
-        private platform: Platform,
-        private splashScreen: SplashScreen,
-        private statusBar: StatusBar,
-        private dataService: DataService
+        private readonly bottomSheet: MatBottomSheet,
+        private readonly platform: Platform,
+        private readonly splashScreen: SplashScreen,
+        private readonly statusBar: StatusBar,
+        private readonly dataService: DataService
     ) {
         this.initializeApp();
     }
 
-    ngOnInit() {
-        this.dataService.list.subscribe(list => (this.data = list));
+    ngOnInit(): void {
+        this.dataService.list.subscribe((list) => (this.data = list));
     }
 
-    initializeApp() {
+    initializeApp(): void {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
