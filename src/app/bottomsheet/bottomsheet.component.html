@@ -1,7 +1,7 @@
 <mat-nav-list>
   
   <div class="footer-list" data-cy="btm-sheet-sort" id="bottom-panel-item-1">
-    <h3>Sort by</h3>
+    <h5>Sort by</h5> 
     <div fxLayout="row wrap" fxLayoutAlign="center center">
       <a [class.active]="activeSort == filterTypes.TIME" (click)="sortData(filterTypes?.TIME)">
         <button mat-icon-button>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="footer-list" data-cy="btm-sheet-show" id="bottom-panel-item-2">
-    <h3>Show:</h3>
+    <h5>Show:</h5>
     <div fxLayout="row wrap" fxLayoutAlign="center center">
       <a data-cy="active-alarms" [class.active]="checkActive(filterTypes.ACTIVE_ALARMS)" (click)="filterData(filterTypes.ACTIVE_ALARMS)">
         <button mat-icon-button>
