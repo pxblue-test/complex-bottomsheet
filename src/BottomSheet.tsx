@@ -3,7 +3,7 @@ import { Animated, SafeAreaView, StyleSheet } from 'react-native';
 import * as Colors from '@pxblue/colors';
 
 type BottomSheetState = {
-    bounceValue: any;
+    bounceValue: Animated.Value;
 };
 
 type BottomSheetProps = {
@@ -11,12 +11,19 @@ type BottomSheetProps = {
     style: object;
 };
 
+const styles = StyleSheet.create({
+    safeContainer: {
+        backgroundColor: Colors.white[100],
+        flex: 1,
+    },
+});
+
 class BottomSheet extends React.PureComponent<BottomSheetProps, BottomSheetState> {
     constructor(props: BottomSheetProps) {
         super(props);
         this.state = { bounceValue: new Animated.Value(this.props.show ? 0 : 400) };
     }
-    componentDidUpdate(prevProps: BottomSheetProps) {
+    componentDidUpdate(prevProps: BottomSheetProps): void {
         if (this.props.show !== prevProps.show) {
             const bounceValue = this.props.show ? 0 : 400;
             Animated.timing(this.state.bounceValue, {
@@ -25,7 +32,7 @@ class BottomSheet extends React.PureComponent<BottomSheetProps, BottomSheetState
             }).start();
         }
     }
-    render() {
+    render(): JSX.Element {
         return (
             <Animated.View style={[this.props.style, { transform: [{ translateY: this.state.bounceValue }] }]}>
                 <SafeAreaView style={styles.safeContainer}>{this.props.children}</SafeAreaView>
@@ -33,12 +40,5 @@ class BottomSheet extends React.PureComponent<BottomSheetProps, BottomSheetState
         );
     }
 }
-
-const styles = StyleSheet.create({
-    safeContainer: {
-        backgroundColor: Colors.white[100],
-        flex: 1,
-    },
-});
 
 export default BottomSheet;

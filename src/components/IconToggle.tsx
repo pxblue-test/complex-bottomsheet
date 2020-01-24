@@ -10,15 +10,21 @@ type IconToggleProps = {
     style?: object;
 };
 
+const styles = StyleSheet.create({
+    iconContainer: {
+        margin: 20,
+    },
+});
+
 class IconToggle extends React.PureComponent<IconToggleProps> {
     constructor(props: IconToggleProps) {
         super(props);
     }
 
-    render() {
+    render(): JSX.Element {
         const { IconComponent, label, active, onPress } = this.props;
         const { iconContainer } = styles;
-        let color = active ? Colors.blue['500'] : Colors.black['500'];
+        const color = active ? Colors.blue['500'] : Colors.black['500'];
         return (
             <View>
                 <TouchableOpacity onPress={onPress}>
@@ -33,9 +39,3 @@ class IconToggle extends React.PureComponent<IconToggleProps> {
 }
 
 export default IconToggle;
-
-const styles = StyleSheet.create({
-    iconContainer: {
-        margin: 20,
-    },
-});

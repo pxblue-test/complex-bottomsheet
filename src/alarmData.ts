@@ -13,9 +13,9 @@ type alarmDataObject = {
     details: string;
 };
 
-export function formatDate(timestamp: number) {
-    let date = new Date(timestamp);
-    return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+export function formatDate(timestamp: number): string {
+    const date = new Date(timestamp);
+    return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 }
 
 function getRandomData(): alarmDataObject {
@@ -48,11 +48,13 @@ function getRandomData(): alarmDataObject {
                 device: DEVICES[Math.floor(Math.random() * DEVICES.length)],
                 details: 'Run Session',
             };
+        default:
+            return null;
     }
 }
 
-function getAlarmList(count: number): Array<alarmDataObject> {
-    let data = [];
+function getAlarmList(count: number): alarmDataObject[] {
+    const data = [];
     for (let i = 0; i < count; i++) {
         data.push(getRandomData());
     }

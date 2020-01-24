@@ -7,6 +7,14 @@ import * as Font from 'expo-font';
 
 import Alarms from './src/Alarms';
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: Colors.white[100],
+        marginTop: Platform.OS === 'android' ? 24 : 0,
+    },
+});
+
 export default class App extends React.Component {
     /*
      * This componentDidMount method is used to asynchronously load the open sans font into
@@ -38,11 +46,3 @@ export default class App extends React.Component {
         ) : null;
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: Colors.white[100],
-        marginTop: Platform.OS === 'android' ? 24 : 0,
-    },
-});
