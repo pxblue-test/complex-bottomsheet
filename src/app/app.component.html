@@ -1,34 +1,43 @@
 <ion-app>
-  <ion-header>
-    <ion-toolbar>
-      <div color="primary" class="header-content" fxLayout="row" fxLayoutAlign="start center">
-        <ion-button size="small" fill="clear" class="menu-icon">
-          <mat-icon>menu</mat-icon>
-        </ion-button>
-        <div class="title-wrapper">
-          <div class="mat-title">Complex Bottom Sheet</div>
-        </div>
-        <ion-button size="small" fill="clear" flex="end" #morevert mat-icon-button (click)="showBottomSheet()" class="toolbar-button">
-          <mat-icon>more_vert</mat-icon>
-        </ion-button>
-      </div>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-      <mat-nav-list *ngIf="data.length > 0">
-          <mat-list-item *ngFor="let i of data; let index = index;" [class.active]="i.active">
-            <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'alarms' && !i.active">notifications</mat-icon>
-            <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'alarms' && i.active">notifications_active</mat-icon>
-            <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
-            <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
-            <p mat-line class="list-item-title">
-              <ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
-            </p> 
-            <p mat-line>
-              {{ i.date | date: 'MM/dd/yyyy' }}
-            </p>
-
-          </mat-list-item>
-          </mat-nav-list>
-  </ion-content>
+    <ion-header>
+        <ion-toolbar>
+            <div color="primary" class="header-content" fxLayout="row" fxLayoutAlign="start center">
+                <ion-button size="small" fill="clear" class="menu-icon">
+                    <mat-icon>menu</mat-icon>
+                </ion-button>
+                <div class="title-wrapper">
+                    <div class="mat-title">Complex Bottom Sheet</div>
+                </div>
+                <ion-button
+                    size="small"
+                    fill="clear"
+                    flex="end"
+                    #morevert
+                    mat-icon-button
+                    (click)="showBottomSheet()"
+                    class="toolbar-button"
+                >
+                    <mat-icon>more_vert</mat-icon>
+                </ion-button>
+            </div>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <mat-nav-list *ngIf="data.length > 0">
+            <mat-list-item *ngFor="let i of data; let index = index" [class.active]="i.active">
+                <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'alarms' && !i.active">notifications</mat-icon>
+                <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'alarms' && i.active"
+                    >notifications_active</mat-icon
+                >
+                <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
+                <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
+                <p mat-line class="list-item-title">
+                    <ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
+                </p>
+                <p mat-line>
+                    {{ i.date | date: 'MM/dd/yyyy' }}
+                </p>
+            </mat-list-item>
+        </mat-nav-list>
+    </ion-content>
 </ion-app>

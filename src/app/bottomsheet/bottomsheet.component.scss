@@ -1,21 +1,21 @@
 .bottomPanel {
     padding: 0;
-    .mat-nav-list{
+    .mat-nav-list {
         padding: 0;
     }
-    a{
+    a {
         padding: 10px;
         cursor: pointer;
         text-align: center;
-        &.active{
-        color: #007bc1;
+        &.active {
+            color: #007bc1;
         }
     }
-    .footer-list{
+    .footer-list {
         padding: 15px;
         border-bottom: 1px solid #ccc;
     }
-    h5{
+    h5 {
         margin: 0;
     }
 }
@@ -32,7 +32,7 @@
     .mat-bottom-sheet-container {
         min-width: 100vw;
 
-        .mat-nav-list mat-list-item .mat-line{
+        .mat-nav-list mat-list-item .mat-line {
             text-overflow: inherit;
             white-space: normal;
         }
@@ -42,5 +42,4 @@
         border-top-left-radius: unset;
         border-top-right-radius: unset;
     }
-
 }

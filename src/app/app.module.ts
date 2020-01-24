@@ -20,42 +20,27 @@ import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
 import { Overlay } from '@angular/cdk/overlay';
 
 @NgModule({
-  exports: [
-    MatButtonModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatBottomSheetModule,
-  ]
+    exports: [MatButtonModule, MatIconModule, MatListModule, MatToolbarModule, MatBottomSheetModule],
 })
 export class MaterialModule {}
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BottomsheetComponent
-  ],
-  entryComponents: [
-    BottomsheetComponent
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    FlexLayoutModule,
-    MatListModule,
-    ScrollingModule,
-    MatBottomSheetModule,
-    BrowserAnimationsModule,
-    FormsModule
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    Overlay
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, BottomsheetComponent],
+    entryComponents: [BottomsheetComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        FlexLayoutModule,
+        MatListModule,
+        ScrollingModule,
+        MatBottomSheetModule,
+        BrowserAnimationsModule,
+        FormsModule,
+    ],
+    providers: [StatusBar, SplashScreen, Overlay],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

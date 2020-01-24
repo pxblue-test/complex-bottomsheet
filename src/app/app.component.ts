@@ -8,36 +8,35 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-shee
 import { BottomsheetComponent } from './bottomsheet/bottomsheet.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+    selector: 'app-root',
+    templateUrl: 'app.component.html',
+    styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+    data = [];
+    Colors = Colors;
 
-  data = [];
-  Colors = Colors;
+    constructor(
+        private bottomSheet: MatBottomSheet,
+        private platform: Platform,
+        private splashScreen: SplashScreen,
+        private statusBar: StatusBar,
+        private dataService: DataService
+    ) {
+        this.initializeApp();
+    }
 
-  constructor(
-    private bottomSheet: MatBottomSheet,
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private dataService: DataService
-  ) {
-    this.initializeApp();
-  }
+    ngOnInit() {
+        this.dataService.list.subscribe(list => (this.data = list));
+    }
 
-  ngOnInit() {
-    this.dataService.list.subscribe((list) => this.data = list);
-  }
-
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
-  showBottomSheet(): MatBottomSheetRef {
-    return this.bottomSheet.open(BottomsheetComponent, {restoreFocus: false, panelClass: 'bottomPanel'});
-  }
+    initializeApp() {
+        this.platform.ready().then(() => {
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+        });
+    }
+    showBottomSheet(): MatBottomSheetRef {
+        return this.bottomSheet.open(BottomsheetComponent, { restoreFocus: false, panelClass: 'bottomPanel' });
+    }
 }

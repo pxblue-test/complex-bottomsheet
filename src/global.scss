@@ -10,47 +10,49 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
 
 @import '~@pxblue/colors/palette.scss';
 
-html, body { 
-  margin: 0;
-  height: 100%;
-  width: 100%;
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
-ion-header,ion-toolbar {
-  color: map-get($pxb-white, 50);
-  --color : map-get($pxb-white, 50);
-  --background: map-get($pxb-blue, 500); 
-  background: map-get($pxb-blue, 500);
-  border: none;
-  --padding-top: 0;
-  --padding-start:0;
-  --padding-bottom:0;
-  --padding-end: 0;
-  padding: 0;
-  margin: 0;
+ion-header,
+ion-toolbar {
+    color: map-get($pxb-white, 50);
+    --color: map-get($pxb-white, 50);
+    --background: map-get($pxb-blue, 500);
+    background: map-get($pxb-blue, 500);
+    border: none;
+    --padding-top: 0;
+    --padding-start: 0;
+    --padding-bottom: 0;
+    --padding-end: 0;
+    padding: 0;
+    margin: 0;
 }
 
-ion-button{
-  color: map-get($pxb-white, 50);
-  --padding-start : 0px;
-  --padding-end : 0px;
-  margin: 0;
-  height: 24px;
+ion-button {
+    color: map-get($pxb-white, 50);
+    --padding-start: 0px;
+    --padding-end: 0px;
+    margin: 0;
+    height: 24px;
 }
