@@ -11,7 +11,7 @@ describe('Service: DataService', () => {
         })
     );
 
-    beforeEach(inject([DataService], (s) => {
+    beforeEach(inject([DataService], s => {
         service = s;
     }));
 

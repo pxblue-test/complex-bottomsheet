@@ -9,12 +9,11 @@ type alarmDataObject = {
     location: string;
     device: string;
     details: string;
-}
+};
 
 @Injectable({
     providedIn: 'root',
 })
-
 export class DataService {
     dataList: alarmDataObject[] = [];
     activeFilters = ['settings', 'activeAlarms', 'alarms', 'session'];
@@ -74,7 +73,7 @@ export class DataService {
                     details: 'Run Session',
                 };
             default:
-                return null
+                return null;
         }
     }
 
@@ -100,20 +99,17 @@ export class DataService {
                         return -1;
                     } else if (a.type > b.type) {
                         return 1;
-                    } 
-                        // secondary sort by alarm active and/or date
-                        if (a.type !== 'alarms') {
-                            return b.date - a.date;
-                        } 
-                            if (a.active && !b.active) {
-                                return -1;
-                            } else if (b.active && !a.active) {
-                                return 1;
-                            } 
-                                return b.date - a.date;
-                            
-                        
-                    
+                    }
+                    // secondary sort by alarm active and/or date
+                    if (a.type !== 'alarms') {
+                        return b.date - a.date;
+                    }
+                    if (a.active && !b.active) {
+                        return -1;
+                    } else if (b.active && !a.active) {
+                        return 1;
+                    }
+                    return b.date - a.date;
                 });
             case FiltersList.TIME:
                 return data.sort((a, b) => b.date - a.date);
@@ -123,14 +119,13 @@ export class DataService {
     }
 
     filterAlarms(data): alarmDataObject[] {
-        return data.filter((item) => {
+        return data.filter(item => {
             if (item.type === 'alarms' && !item.active) {
                 return this.activeFilters.includes('alarms') ? true : false;
             } else if (item.type === 'alarms' && item.active) {
                 return this.activeFilters.includes('activeAlarms') ? true : false;
-            } 
-                return this.activeFilters.includes(item.type);
-            
+            }
+            return this.activeFilters.includes(item.type);
         });
     }
 }

@@ -5,12 +5,12 @@ import { FiltersList } from '../filter';
 
 type filterDataObject = {
     ACTIVE_ALARMS: string;
-    ALARMS:  string;
+    ALARMS: string;
     TIME: string;
     SETTINGS: string;
     EVENT_TYPE: string;
-    SESSION:  string;
-}
+    SESSION: string;
+};
 
 @Component({
     selector: 'bottom-sheet',
@@ -23,7 +23,10 @@ export class BottomsheetComponent {
     filterTypes: filterDataObject;
     activeSort;
 
-    constructor(private readonly bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>, private readonly dataService: DataService) {}
+    constructor(
+        private readonly bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>,
+        private readonly dataService: DataService
+    ) {}
 
     ngOnInit(): void {
         this.activefilters = this.dataService.activeFilters;
