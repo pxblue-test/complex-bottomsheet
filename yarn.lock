@@ -1065,6 +1065,11 @@
   resolved "https://registry.yarnpkg.com/@pxblue/colors/-/colors-1.0.13.tgz#1ed76734267f77dd4b390836f61d01439fc35132"
   integrity sha512-tneNNYclHmNNIbo6J7XXEumoJZLBXqeO2LFufWxRvIs5yeVVfaJN3zWREl1oo5KP67aDixYgEKB7LH0oeTL+lQ==
 
+"@pxblue/colors@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@pxblue/colors/-/colors-2.0.0.tgz#fa7d2abde80485537f26521df4c3f6e56dd93361"
+  integrity sha512-1JoCVC17nHmC6bbqg2nCAHJgJLHAWNIAmS/UZ3h8u0TnvU5C6qI+CpCrn/sP6bNSQ3LLhEkdVpjKna1kxCXdhg==
+
 "@pxblue/eslint-config@latest":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@pxblue/eslint-config/-/eslint-config-1.1.2.tgz#42ed0192ea323e97d3e214e3de7fd8a186a12eab"
@@ -1093,12 +1098,12 @@
     react-native-keyboard-aware-scroll-view "^0.8.0"
     react-native-status-bar-height "^2.3.1"
 
-"@pxblue/themes@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/@pxblue/themes/-/themes-2.2.4.tgz#ef663d4625c35dc1a2dd813bb65963143b839db0"
-  integrity sha512-ji9tMpFsF4ZgKk3pkoepjymtBmgnlLjCycDd0W6pkps95SvznQFNXAFYhlAfr25m+IvSQTEQFlj7MrEluYBfLA==
+"@pxblue/themes@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@pxblue/themes/-/themes-3.0.1.tgz#f364742cbb6b2f9a82697ad688fb66cdaad5950a"
+  integrity sha512-3ALlKg6IMTgb+xSD5KQyN1C35HrcsY9j3Ss/35+q48YeDF5hHHtKG2WEEz+//cMpNXzJ3ZtFoJzN09EevzFLkQ==
   dependencies:
-    "@pxblue/colors" "^1.0.13"
+    "@pxblue/colors" "^2.0.0"
     typeface-open-sans "^0.0.54"
 
 "@react-native-community/cli@^1.2.1":
@@ -1173,6 +1178,28 @@
   integrity sha512-yGeB2dHEdvxjP0y4UbRtQaSkXJ9649fYCmIdRoul5kfAoGCwxuCbMhag0k3RPfnuh9kPGm8x89btcfDEXdVWGw==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/cheerio@*":
+  version "0.22.15"
+  resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.15.tgz#69040ffa92c309beeeeb7e92db66ac3f80700c0b"
+  integrity sha512-UGiiVtJK5niCqMKYmLEFz1Wl/3L5zF/u78lu8CwoUywWXRr9LDimeYuOzXVLXBMO758fcTdFtgjvqlztMH90MA==
+  dependencies:
+    "@types/node" "*"
+
+"@types/enzyme-adapter-react-16@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@types/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.0.5.tgz#1bf30a166f49be69eeda4b81e3f24113c8b4e9d5"
+  integrity sha512-K7HLFTkBDN5RyRmU90JuYt8OWEY2iKUn43SDWEoBOXd/PowUWjLZ3Q6qMBiQuZeFYK/TOstaZxsnI0fXoAfLpg==
+  dependencies:
+    "@types/enzyme" "*"
+
+"@types/enzyme@*", "@types/enzyme@^3.10.4":
+  version "3.10.4"
+  resolved "https://registry.yarnpkg.com/@types/enzyme/-/enzyme-3.10.4.tgz#dd4961042381a7c0f6637ce25fec3f773ce489dd"
+  integrity sha512-P5XpxcIt9KK8QUH4al4ttfJfIHg6xmN9ZjyUzRSzAsmDYwRXLI05ng/flZOPXrEXmp8ZYiN8/tEXYK5KSOQk3w==
+  dependencies:
+    "@types/cheerio" "*"
+    "@types/react" "*"
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
@@ -1262,6 +1289,13 @@
   integrity sha512-Y0Q+nv50KHnLL+jM0UH68gQQv7Wt6v2KuNepiHKwK1DoWGVd1oYun/GJCnvUje+/V8pMQQWW6QuBvHZz1pV7tQ==
   dependencies:
     "@types/prop-types" "*"
+    "@types/react" "*"
+
+"@types/react-test-renderer@^16.9.2":
+  version "16.9.2"
+  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.2.tgz#e1c408831e8183e5ad748fdece02214a7c2ab6c5"
+  integrity sha512-4eJr1JFLIAlWhzDkBCkhrOIWOvOxcCAfQh+jiKg7l/nNZcCIL2MHl2dZhogIFKyHzedVWHaVP1Yydq/Ruu4agw==
+  dependencies:
     "@types/react" "*"
 
 "@types/react@*", "@types/react@~16.9.0":

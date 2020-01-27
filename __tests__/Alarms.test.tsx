@@ -46,7 +46,7 @@ describe('bottom sheet', () => {
     });
 
     it('should update bottomsheet state accordingly', () => {
-        const wrapper = shallow(<Alarms />);
+        const wrapper = shallow<Alarms>(<Alarms />);
         expect(wrapper.instance().state.showBottomSheet).toEqual(false);
         expect(wrapper.find(BottomSheet).props().show).toEqual(false);
 
@@ -58,29 +58,33 @@ describe('bottom sheet', () => {
     });
 
     it('sorts events correctly', () => {
-        const wrapper = shallow(<Alarms></Alarms>);
+        const wrapper = shallow<Alarms>(<Alarms/>);
         const data = [
-            { type: 'alarm', date: 0, active: 0 },
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'settings', date: 4 },
-            { type: 'session', date: 8 },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: ''},
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
         ];
         const sortedTime = [
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'session', date: 8 },
-            { type: 'settings', date: 4 },
-            { type: 'alarm', date: 0, active: 0 },
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: '' },
         ];
         const sortedType = [
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'alarm', date: 0, active: 0 },
-            { type: 'session', date: 8 },
-            { type: 'settings', date: 4 },
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: '' },
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
         ];
         wrapper.instance().state = {
-            showMenu: false,
+            showBottomSheet: false,
             alarmList: data,
             currentSort: 'time',
+            showAlarms: false,
+            showActiveAlarms: false,
+            showEvents: false,
+            showSessions: false,
         };
         let sorted = wrapper.instance().sortedEvents();
         expect(sorted).toEqual(sortedTime);
@@ -90,39 +94,41 @@ describe('bottom sheet', () => {
     });
 
     it('filters events correctly', () => {
-        const wrapper = shallow(<Alarms></Alarms>);
+        const wrapper = shallow<Alarms>(<Alarms/>);
         const data = [
-            { type: 'alarm', date: 0, active: 0 },
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'settings', date: 4 },
-            { type: 'session', date: 8 },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: ''},
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
         ];
 
         // show all
         const all = [
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'alarm', date: 0, active: 0 },
-            { type: 'session', date: 8 },
-            { type: 'settings', date: 4 },
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: ''},
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
         ];
 
         // show alarms
         const alarms = [
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'alarm', date: 0, active: 0 },
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'alarm', date: 0, active: false, location: '', device:'', details: ''},
         ];
 
         // show sessions
-        const sessions = [{ type: 'session', date: 8 }];
+        const sessions = [ 
+            { type: 'session', date: 8, active: true, location: '', device:'', details: '' },
+        ];
 
         // show settings and active alarms
         const settingsandactive = [
-            { type: 'alarm', date: 10, active: 1 },
-            { type: 'settings', date: 4 },
+            { type: 'alarm', date: 10, active: true, location: '', device:'', details: '' },
+            { type: 'settings', date: 4, active: true, location: '', device:'', details: '' },
         ];
 
         wrapper.instance().state = {
-            showMenu: false,
+            showBottomSheet: false,
             alarmList: data,
             currentSort: 'type',
             showAlarms: true,
