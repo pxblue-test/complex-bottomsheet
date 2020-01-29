@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-native-modal';
+import { View, TouchableWithoutFeedback } from 'react-native';
 
 type BottomSheetProps = {
     show: boolean;

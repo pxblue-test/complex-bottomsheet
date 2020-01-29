@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     },
     rowHeader: {
         padding: 10,
+        backgroundColor: Colors.white[100],
     },
     footer: {
         margin: 0,

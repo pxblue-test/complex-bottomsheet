@@ -1,8 +1,6 @@
 import React from 'react';
-import TestRenderer, { ReactTestInstance } from 'react-test-renderer';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 Enzyme.configure({ adapter: new Adapter() });
 
