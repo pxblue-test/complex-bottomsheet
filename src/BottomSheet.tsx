@@ -1,7 +1,5 @@
 import React from 'react';
-import Modal from "react-native-modal";
-import { SafeAreaView } from 'react-native';
-
+import Modal from 'react-native-modal';
 
 type BottomSheetProps = {
     show: boolean;
@@ -15,7 +13,7 @@ class BottomSheet extends React.PureComponent<BottomSheetProps> {
     }
     render(): JSX.Element {
         return (
-            <Modal 
+            <Modal
                 isVisible={this.props.show}
                 onBackdropPress={this.props.dismissBottomSheet}
                 onBackButtonPress={this.props.dismissBottomSheet}
@@ -23,7 +21,6 @@ class BottomSheet extends React.PureComponent<BottomSheetProps> {
             >
                 {this.props.children}
             </Modal>
-            
         );
     }
 }

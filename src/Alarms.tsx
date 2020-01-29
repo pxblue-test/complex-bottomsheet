@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, ScrollView, View } from 'react-native';
 import * as Colors from '@pxblue/colors';
 import { Divider, Icon, ListItem } from 'react-native-elements';
-import { Header, InfoListItem, wrapIcon, H6, H3 } from '@pxblue/react-native-components';
+import { Header, InfoListItem, wrapIcon, H6 } from '@pxblue/react-native-components';
 import SafeAreaView from 'react-native-safe-area-view';
 
 const MenuIcon = wrapIcon({ IconClass: Icon, name: 'menu' });
@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
     bottomSheetItemTitle: {
         paddingLeft: 16,
         color: Colors.black[500],
-        fontFamily: 'OpenSans-Regular'
+        fontFamily: 'OpenSans-Regular',
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
-        flexWrap: "wrap",
+        flexWrap: 'wrap',
         marginVertical: 8,
     },
     rowHeader: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 10,
         position: 'absolute',
-        display:'flex',
+        display: 'flex',
         bottom: 0,
         // right: 0,
         width: '100%',
@@ -176,12 +176,12 @@ class Alarms extends React.Component<{}, AlarmsState> {
                         ))}
                     </ScrollView>
                 </SafeAreaView>
-                <BottomSheet 
+                <BottomSheet
                     show={this.state.showBottomSheet}
-                    dismissBottomSheet={(): void => this.setState({showBottomSheet: false})}
+                    dismissBottomSheet={(): void => this.setState({ showBottomSheet: false })}
                     style={styles.footer}
                 >
-                    <SafeAreaView forceInset={{bottom: 'always'}}>
+                    <SafeAreaView forceInset={{ bottom: 'always' }}>
                         <View style={styles.rowHeader}>
                             <H6>Sort By: </H6>
                             <View style={styles.row}>
@@ -211,7 +211,9 @@ class Alarms extends React.Component<{}, AlarmsState> {
                                     IconComponent={NotificatonsActiveIcon}
                                     active={this.state.showActiveAlarms}
                                     label={'Active Alarms'}
-                                    onPress={(): void => this.setState({ showActiveAlarms: !this.state.showActiveAlarms })}
+                                    onPress={(): void =>
+                                        this.setState({ showActiveAlarms: !this.state.showActiveAlarms })
+                                    }
                                 >
                                     {' '}
                                 </IconToggle>
@@ -244,7 +246,7 @@ class Alarms extends React.Component<{}, AlarmsState> {
                         <Divider />
                         <ListItem
                             title={'Close'}
-                            leftIcon={{ name: 'clear' , color: Colors.black[500]}}
+                            leftIcon={{ name: 'clear', color: Colors.black[500] }}
                             onPress={(): void => this.setState({ showBottomSheet: false })}
                             titleStyle={styles.bottomSheetItemTitle}
                             testID={'cancel-button'}

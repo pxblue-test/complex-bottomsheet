@@ -57,7 +57,7 @@ function getRandomData(): alarmDataObject {
                 location: LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)],
                 device: DEVICES[Math.floor(Math.random() * DEVICES.length)],
                 details: DETAILS[Math.floor(Math.random() * DETAILS.length)],
-            };;
+            };
     }
 }
 
