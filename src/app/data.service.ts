@@ -17,7 +17,7 @@ type alarmDataObject = {
 export class DataService {
     dataList: alarmDataObject[] = [];
     activeFilters = ['settings', 'activeAlarms', 'alarms', 'session'];
-    activeSort = FiltersList.TIME;
+    activeSort: string = FiltersList.TIME;
 
     private readonly dataSource = new BehaviorSubject(this.dataList);
     list = this.dataSource.asObservable();
@@ -81,16 +81,16 @@ export class DataService {
         this.dataSource.next(this.sortAlarms(this.filterAlarms(this.dataList)));
     }
 
-    updateSort(sortType): void {
+    updateSort(sortType: string): void {
         this.activeSort = sortType;
         this.passData();
     }
-    updateFilters(filterList): void {
+    updateFilters(filterList: string[]): void {
         this.activeFilters = filterList;
         this.passData();
     }
 
-    sortAlarms(data): alarmDataObject[] {
+    sortAlarms(data: alarmDataObject[]): alarmDataObject[] {
         switch (this.activeSort) {
             case FiltersList.EVENT_TYPE:
                 return data.sort((a, b) => {
@@ -118,7 +118,7 @@ export class DataService {
         }
     }
 
-    filterAlarms(data): alarmDataObject[] {
+    filterAlarms(data: alarmDataObject[]): alarmDataObject[] {
         return data.filter(item => {
             if (item.type === 'alarms' && !item.active) {
                 return this.activeFilters.includes('alarms') ? true : false;

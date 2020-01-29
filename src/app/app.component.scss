@@ -13,9 +13,13 @@
     padding: 8px;
 }
 
+.mat-list-base .mat-list-item .mat-line {
+    color: map-get($pxb-gray, 500)
+}
+
 .mat-list-base .mat-list-item .mat-line.list-item-title {
-    font-weight: 600;
-    margin-bottom: 5px;
+    font-weight: 600; 
+    color: inherit;
 }
 
 .title-wrapper {
@@ -37,7 +41,6 @@
 mat-list-item {
     border-left: 6px solid transparent;
     box-sizing: border-box;
-    cursor: pointer;
     &.active {
         border-left-color: map-get($pxb-red, 500);
         .list-item-title {

@@ -12,16 +12,16 @@ type filterDataObject = {
     SESSION: string;
 };
 
-@Component({
+@Component({ 
     selector: 'bottom-sheet',
     templateUrl: './bottomsheet.component.html',
     styleUrls: ['./bottomsheet.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class BottomsheetComponent {
-    activefilters;
+    activefilters: string[];
     filterTypes: filterDataObject;
-    activeSort;
+    activeSort: string;
 
     constructor(
         private readonly bottomSheetRef: MatBottomSheetRef<BottomsheetComponent>,
@@ -39,7 +39,7 @@ export class BottomsheetComponent {
         this.bottomSheetRef.dismiss();
     }
 
-    filterData(filter): void {
+    filterData(filter: string): void {
         const index = this.activefilters.indexOf(filter);
         if (index > -1) {
             this.activefilters.splice(index, 1);
@@ -49,12 +49,12 @@ export class BottomsheetComponent {
         this.dataService.updateFilters(this.activefilters);
     }
 
-    sortData(sortText): void {
+    sortData(sortText: string): void {
         this.activeSort = sortText;
         this.dataService.updateSort(sortText);
     }
 
-    checkActive(filter): boolean {
+    checkActive(filter: string): boolean {
         return this.activefilters.indexOf(filter) > -1;
     }
 }

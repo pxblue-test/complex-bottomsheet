@@ -16,6 +16,7 @@ describe('AppComponent', () => {
         splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
         platformReadySpy = Promise.resolve();
         platformSpy = jasmine.createSpyObj('Platform', { ready: platformReadySpy });
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
         TestBed.configureTestingModule({
             imports: [AppModule],

@@ -1,3 +1,9 @@
+@import '~@pxblue/colors/palette.scss';
+
+.menu-icon .mat-icon{
+    color: white !important;
+}
+
 .bottomPanel {
     padding: 0;
     .mat-nav-list {
@@ -7,13 +13,14 @@
         padding: 10px;
         cursor: pointer;
         text-align: center;
+        color: map-get($pxb-black, 500);
         &.active {
-            color: #007bc1;
+            color: map-get($pxb-blue, 500);
         }
     }
     .footer-list {
         padding: 15px;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid map-get($pxb-gray, 500);
     }
     h5 {
         margin: 0;
