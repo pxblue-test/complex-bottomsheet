@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, ScrollView, SafeAreaView, View, Text } from 'react-native';
+import { StyleSheet, ScrollView, SafeAreaView, View } from 'react-native';
 import * as Colors from '@pxblue/colors';
 import { Divider, Icon, ListItem } from 'react-native-elements';
-import { Header, InfoListItem, wrapIcon } from '@pxblue/react-native-components';
+import { Header, InfoListItem, wrapIcon, H6, HeroBanner } from '@pxblue/react-native-components';
 
 const MenuIcon = wrapIcon({ IconClass: Icon, name: 'menu' });
 const MoreIcon = wrapIcon({ IconClass: Icon, name: 'more-vert' });
@@ -15,7 +15,7 @@ const UpdateIcon = wrapIcon({ IconClass: Icon, name: 'update' });
 import BottomSheet from './BottomSheet';
 import IconToggle from './components/IconToggle';
 
-import alarms, { formatDate } from './alarmData';
+import alarms, { formatDate, alarmDataObject } from './alarmData';
 
 const FILTERS = {
     TIME: 'time',
@@ -26,15 +26,6 @@ const TYPES = {
     ALARM: 'alarm',
     SESSION: 'session',
     EVENT: 'settings',
-};
-
-type alarmDataObject = {
-    date: number;
-    type: string;
-    active: boolean;
-    location: string;
-    device: string;
-    details: string;
 };
 
 type AlarmsState = {
@@ -51,6 +42,17 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: Colors.white[100],
         flex: 1,
+        position: 'relative',
+    },
+    bottomSheetItemTitle: {
+        paddingLeft: 16,
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    rowHeader: {
+        padding: 10,
     },
     footer: {
         margin: 0,
@@ -64,37 +66,16 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 10,
         position: 'absolute',
+        display:'flex',
         bottom: 0,
-        right: 0,
+        // right: 0,
         width: '100%',
         maxWidth: 600,
-    },
-    bottomSheetItemTitle: {
-        paddingLeft: 16,
-    },
-    listHeader: {
-        fontSize: 17,
-    },
-    overlay: {
-        backgroundColor: Colors.black[900],
-        opacity: 0.7,
-        width: '100%',
-        height: '100%',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-    },
-    row: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    rowHeader: {
-        padding: 10,
     },
 });
 
 class Alarms extends React.Component<{}, AlarmsState> {
-    constructor(props: object) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             showBottomSheet: false,
@@ -134,7 +115,7 @@ class Alarms extends React.Component<{}, AlarmsState> {
         }
     }
 
-    filteredEvents(events): alarmDataObject[] {
+    filteredEvents(events: alarmDataObject[]): alarmDataObject[] {
         return events.filter(item => {
             if (!this.state.showActiveAlarms && item.type === TYPES.ALARM && item.active) {
                 return false;
@@ -184,22 +165,20 @@ class Alarms extends React.Component<{}, AlarmsState> {
                                 }
                                 iconColor={item.active ? Colors.white[100] : Colors.black[500]}
                                 fontColor={item.active ? Colors.red[500] : Colors.black[500]}
-                                statusColor={item.active ? Colors.red[500] : Colors.white[100]}
-                                avatar={item.active}
+                                statusColor={item.active ? Colors.red[500] : Colors.white[50]}
+                                avatar={true}
                             />
                         ))}
                     </ScrollView>
                 </SafeAreaView>
-                {this.state.showBottomSheet ? (
-                    <View
-                        style={styles.overlay}
-                        onTouchStart={(): void => this.setState({ showBottomSheet: false })}
-                        testID={'overlay'}
-                    ></View>
-                ) : null}
-                <BottomSheet style={styles.footer} show={this.state.showBottomSheet}>
+                <BottomSheet 
+                    show={this.state.showBottomSheet}
+                    dismissBottomSheet={(): void => this.setState({showBottomSheet: false})}
+                    style={styles.footer}
+                >
+                    <SafeAreaView>
                     <View style={styles.rowHeader}>
-                        <Text style={styles.listHeader}>Sort By: </Text>
+                        <H6>Sort By: </H6>
                         <View style={styles.row}>
                             <IconToggle
                                 IconComponent={AccessTimeIcon}
@@ -221,7 +200,7 @@ class Alarms extends React.Component<{}, AlarmsState> {
                     </View>
                     <Divider />
                     <View style={styles.rowHeader}>
-                        <Text style={styles.listHeader}>Show: </Text>
+                        <H6>Show: </H6>
                         <View style={styles.row}>
                             <IconToggle
                                 IconComponent={NotificatonsActiveIcon}
@@ -265,6 +244,16 @@ class Alarms extends React.Component<{}, AlarmsState> {
                         titleStyle={styles.bottomSheetItemTitle}
                         testID={'cancel-button'}
                     />
+                    </SafeAreaView>
+                    {/* <InfoListItem 
+                        title={'Close'}
+                        iconClass={SettingsIcon}
+                        iconColor={Colors.black[500]}
+                        fontColor={Colors.black[500]}
+                        onPress={(): void => this.setState({ showBottomSheet: false })}
+                        rightComponent={<View></View>}
+                        testID={'cancel-button'}
+                    /> */}
                 </BottomSheet>
             </>
         );

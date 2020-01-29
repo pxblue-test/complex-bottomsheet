@@ -4,7 +4,7 @@ const LOCATIONS = ['Dos Valley Field', 'Jameson Field', 'Parker Field West', 'Pa
 const DEVICES = ['MX Power Pro', 'PXL DG1', 'Pentair Aurora'];
 const DETAILS = ['Over Voltage Fault', 'Over Current Fault', 'Under Voltage Fault', 'Under Current Fault'];
 
-type alarmDataObject = {
+export type alarmDataObject = {
     date: number;
     type: string;
     active: boolean;
@@ -49,7 +49,15 @@ function getRandomData(): alarmDataObject {
                 details: 'Run Session',
             };
         default:
-            return null;
+            // should not reach here
+            return {
+                date: Math.round(NOW - Math.random() * 1000000000),
+                type: 'alarm',
+                active: Math.random() < 0.3,
+                location: LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)],
+                device: DEVICES[Math.floor(Math.random() * DEVICES.length)],
+                details: DETAILS[Math.floor(Math.random() * DETAILS.length)],
+            };;
     }
 }
 
