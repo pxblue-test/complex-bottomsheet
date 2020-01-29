@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, ScrollView, SafeAreaView, View } from 'react-native';
+import { StyleSheet, ScrollView, View } from 'react-native';
 import * as Colors from '@pxblue/colors';
 import { Divider, Icon, ListItem } from 'react-native-elements';
-import { Header, InfoListItem, wrapIcon, H6, HeroBanner } from '@pxblue/react-native-components';
+import { Header, InfoListItem, wrapIcon, H6, H3 } from '@pxblue/react-native-components';
+import SafeAreaView from 'react-native-safe-area-view';
 
 const MenuIcon = wrapIcon({ IconClass: Icon, name: 'menu' });
 const MoreIcon = wrapIcon({ IconClass: Icon, name: 'more-vert' });
@@ -46,10 +47,14 @@ const styles = StyleSheet.create({
     },
     bottomSheetItemTitle: {
         paddingLeft: 16,
+        color: Colors.black[500],
+        fontFamily: 'OpenSans-Regular'
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
+        flexWrap: "wrap",
+        marginVertical: 8,
     },
     rowHeader: {
         padding: 10,
@@ -176,84 +181,75 @@ class Alarms extends React.Component<{}, AlarmsState> {
                     dismissBottomSheet={(): void => this.setState({showBottomSheet: false})}
                     style={styles.footer}
                 >
-                    <SafeAreaView>
-                    <View style={styles.rowHeader}>
-                        <H6>Sort By: </H6>
-                        <View style={styles.row}>
-                            <IconToggle
-                                IconComponent={AccessTimeIcon}
-                                active={this.state.currentSort === FILTERS.TIME}
-                                label={'Time'}
-                                onPress={(): void => this.setState({ currentSort: FILTERS.TIME })}
-                            >
-                                {' '}
-                            </IconToggle>
-                            <IconToggle
-                                IconComponent={InfoIcon}
-                                active={this.state.currentSort === FILTERS.TYPE}
-                                label={'Type'}
-                                onPress={(): void => this.setState({ currentSort: FILTERS.TYPE })}
-                            >
-                                {' '}
-                            </IconToggle>
+                    <SafeAreaView forceInset={{bottom: 'always'}}>
+                        <View style={styles.rowHeader}>
+                            <H6>Sort By: </H6>
+                            <View style={styles.row}>
+                                <IconToggle
+                                    IconComponent={AccessTimeIcon}
+                                    active={this.state.currentSort === FILTERS.TIME}
+                                    label={'Time'}
+                                    onPress={(): void => this.setState({ currentSort: FILTERS.TIME })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                                <IconToggle
+                                    IconComponent={InfoIcon}
+                                    active={this.state.currentSort === FILTERS.TYPE}
+                                    label={'Type'}
+                                    onPress={(): void => this.setState({ currentSort: FILTERS.TYPE })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                            </View>
                         </View>
-                    </View>
-                    <Divider />
-                    <View style={styles.rowHeader}>
-                        <H6>Show: </H6>
-                        <View style={styles.row}>
-                            <IconToggle
-                                IconComponent={NotificatonsActiveIcon}
-                                active={this.state.showActiveAlarms}
-                                label={'Active Alarms'}
-                                onPress={(): void => this.setState({ showActiveAlarms: !this.state.showActiveAlarms })}
-                            >
-                                {' '}
-                            </IconToggle>
-                            <IconToggle
-                                IconComponent={NotificatonsIcon}
-                                active={this.state.showAlarms}
-                                label={'Alarms'}
-                                onPress={(): void => this.setState({ showAlarms: !this.state.showAlarms })}
-                            >
-                                {' '}
-                            </IconToggle>
-                            <IconToggle
-                                IconComponent={SettingsIcon}
-                                active={this.state.showEvents}
-                                label={'Settings'}
-                                onPress={(): void => this.setState({ showEvents: !this.state.showEvents })}
-                            >
-                                {' '}
-                            </IconToggle>
-                            <IconToggle
-                                IconComponent={UpdateIcon}
-                                active={this.state.showSessions}
-                                label={'Sessions'}
-                                onPress={(): void => this.setState({ showSessions: !this.state.showSessions })}
-                            >
-                                {' '}
-                            </IconToggle>
+                        <Divider />
+                        <View style={styles.rowHeader}>
+                            <H6>Show: </H6>
+                            <View style={styles.row}>
+                                <IconToggle
+                                    IconComponent={NotificatonsActiveIcon}
+                                    active={this.state.showActiveAlarms}
+                                    label={'Active Alarms'}
+                                    onPress={(): void => this.setState({ showActiveAlarms: !this.state.showActiveAlarms })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                                <IconToggle
+                                    IconComponent={NotificatonsIcon}
+                                    active={this.state.showAlarms}
+                                    label={'Alarms'}
+                                    onPress={(): void => this.setState({ showAlarms: !this.state.showAlarms })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                                <IconToggle
+                                    IconComponent={SettingsIcon}
+                                    active={this.state.showEvents}
+                                    label={'Settings'}
+                                    onPress={(): void => this.setState({ showEvents: !this.state.showEvents })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                                <IconToggle
+                                    IconComponent={UpdateIcon}
+                                    active={this.state.showSessions}
+                                    label={'Sessions'}
+                                    onPress={(): void => this.setState({ showSessions: !this.state.showSessions })}
+                                >
+                                    {' '}
+                                </IconToggle>
+                            </View>
                         </View>
-                    </View>
-                    <Divider />
-                    <ListItem
-                        title={'Close'}
-                        leftIcon={{ name: 'clear' }}
-                        onPress={(): void => this.setState({ showBottomSheet: false })}
-                        titleStyle={styles.bottomSheetItemTitle}
-                        testID={'cancel-button'}
-                    />
+                        <Divider />
+                        <ListItem
+                            title={'Close'}
+                            leftIcon={{ name: 'clear' , color: Colors.black[500]}}
+                            onPress={(): void => this.setState({ showBottomSheet: false })}
+                            titleStyle={styles.bottomSheetItemTitle}
+                            testID={'cancel-button'}
+                        />
                     </SafeAreaView>
-                    {/* <InfoListItem 
-                        title={'Close'}
-                        iconClass={SettingsIcon}
-                        iconColor={Colors.black[500]}
-                        fontColor={Colors.black[500]}
-                        onPress={(): void => this.setState({ showBottomSheet: false })}
-                        rightComponent={<View></View>}
-                        testID={'cancel-button'}
-                    /> */}
                 </BottomSheet>
             </>
         );

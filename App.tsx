@@ -4,6 +4,7 @@ import * as Colors from '@pxblue/colors';
 import { ThemeProvider } from '@pxblue/react-native-components';
 import { ReactNativeThemes } from '@pxblue/themes';
 import * as Font from 'expo-font';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Alarms from './src/Alarms';
 
@@ -38,11 +39,13 @@ export default class App extends React.Component {
 
     render() {
         return this.state.fontLoaded ? (
-            <ThemeProvider theme={ReactNativeThemes.blue}>
-                <View style={styles.container}>
-                    <Alarms />
-                </View>
-            </ThemeProvider>
+            <SafeAreaProvider>
+                <ThemeProvider theme={ReactNativeThemes.blue}>
+                    <View style={styles.container}>
+                        <Alarms />
+                    </View>
+                </ThemeProvider>
+            </SafeAreaProvider>
         ) : null;
     }
 }

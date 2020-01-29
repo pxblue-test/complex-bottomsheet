@@ -21,9 +21,7 @@ class BottomSheet extends React.PureComponent<BottomSheetProps> {
                 onBackButtonPress={this.props.dismissBottomSheet}
                 style={this.props.style}
             >
-                <SafeAreaView style={{ flex: 1, position: 'relative' }}>
-                    {this.props.children}
-                </SafeAreaView>
+                {this.props.children}
             </Modal>
             
         );
