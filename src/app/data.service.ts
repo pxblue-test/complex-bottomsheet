@@ -119,7 +119,7 @@ export class DataService {
     }
 
     filterAlarms(data: alarmDataObject[]): alarmDataObject[] {
-        return data.filter(item => {
+        return data.filter((item) => {
             if (item.type === 'alarms' && !item.active) {
                 return this.activeFilters.includes('alarms') ? true : false;
             } else if (item.type === 'alarms' && item.active) {

@@ -53,7 +53,7 @@ describe('AppComponent', () => {
         expect(showBottomSheetSpy).toHaveBeenCalled();
     });
 
-    it('should display the bottom sheet when clicking the top right icon', done => {
+    it('should display the bottom sheet when clicking the top right icon', (done) => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
         app.showBottomSheet()
@@ -65,7 +65,7 @@ describe('AppComponent', () => {
             });
     });
 
-    it('should render menu items in the bottom sheet', done => {
+    it('should render menu items in the bottom sheet', (done) => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
         fixture.detectChanges();
@@ -80,7 +80,7 @@ describe('AppComponent', () => {
             });
     });
 
-    it('should cancel the bottom sheet when clicking on the overlay', done => {
+    it('should cancel the bottom sheet when clicking on the overlay', (done) => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
         fixture.detectChanges();

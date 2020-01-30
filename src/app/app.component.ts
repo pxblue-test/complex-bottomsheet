@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.dataService.list.subscribe(list => (this.data = list));
+        this.dataService.list.subscribe((list) => (this.data = list));
     }
 
     initializeApp(): void {
