@@ -1,22 +1,14 @@
 <ion-app>
     <ion-header>
         <ion-toolbar>
-            <div color="primary" class="header-content" fxLayout="row" fxLayoutAlign="start center">
+            <div class="header-content" fxLayout="row" fxLayoutAlign="start center">
                 <ion-button size="small" fill="clear" class="menu-icon">
                     <mat-icon>menu</mat-icon>
                 </ion-button>
                 <div class="title-wrapper">
                     <div class="mat-title">Complex Bottom Sheet</div>
                 </div>
-                <ion-button
-                    size="small"
-                    fill="clear"
-                    flex="end"
-                    #morevert
-                    mat-icon-button
-                    (click)="showBottomSheet()"
-                    class="toolbar-button"
-                >
+                <ion-button fill="clear" (click)="showBottomSheet()" class="menu-icon toolbar-button" color="white">
                     <mat-icon>more_vert</mat-icon>
                 </ion-button>
             </div>

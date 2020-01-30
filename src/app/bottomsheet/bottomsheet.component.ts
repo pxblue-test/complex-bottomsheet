@@ -12,7 +12,7 @@ type filterDataObject = {
     SESSION: string;
 };
 
-@Component({ 
+@Component({
     selector: 'bottom-sheet',
     templateUrl: './bottomsheet.component.html',
     styleUrls: ['./bottomsheet.component.scss'],
@@ -55,6 +55,6 @@ export class BottomsheetComponent {
     }
 
     checkActive(filter: string): boolean {
-        return this.activefilters.indexOf(filter) > -1;
+        return this.activefilters.includes(filter);
     }
 }
