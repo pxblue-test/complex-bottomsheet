@@ -6,7 +6,7 @@
                     <mat-icon>menu</mat-icon>
                 </ion-button>
                 <div class="title-wrapper">
-                    <div class="mat-title">Complex Bottom Sheet</div>
+                    <div class="mat-h3">Complex Bottom Sheet</div>
                 </div>
                 <ion-button fill="clear" (click)="showBottomSheet()" class="menu-icon toolbar-button" color="white">
                     <mat-icon>more_vert</mat-icon>
@@ -23,7 +23,7 @@
                 >
                 <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'session'">update</mat-icon>
                 <mat-icon class="padded" mat-list-icon *ngIf="i.type == 'settings'">settings</mat-icon>
-                <p mat-line class="list-item-title">
+                <p mat-line class="list-item-title mat-body-strong">
                     <ng-container *ngIf="i.active">ACTIVE: </ng-container> {{ i.details }}
                 </p>
                 <p mat-line>

@@ -1,49 +1,48 @@
 <mat-nav-list>
     <div class="footer-list" id="bottom-panel-item-1">
-        <h5 class="mat-h2">Sort by:</h5>
+        <span class="mat-h2 no-margin-bottom">Sort by:</span>
         <div fxLayout="row wrap" fxLayoutAlign="center center">
             <a [class.active]="activeSort == filterTypes.TIME" (click)="sortData(filterTypes?.TIME)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>access_time</mat-icon>
                 </button>
-                <span mat-line style="display: block;">Time</span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;">Time</span>
             </a>
             <a [class.active]="activeSort == filterTypes.EVENT_TYPE" (click)="sortData(filterTypes.EVENT_TYPE)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>info</mat-icon>
                 </button>
-                <span mat-line style="display: block;"> Type</span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;"> Type</span>
             </a>
         </div>
     </div>
 
     <div class="footer-list" id="bottom-panel-item-2">
-        <h5 class="mat-h2">Show:</h5>
+        <span class="mat-h2 no-margin-bottom">Show:</span>
         <div fxLayout="row wrap" fxLayoutAlign="center center">
             <a [class.active]="checkActive(filterTypes.ACTIVE_ALARMS)" (click)="filterData(filterTypes.ACTIVE_ALARMS)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>notifications_active</mat-icon>
                 </button>
-                <span mat-line style="display: block;">Active Alarms</span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;">Active Alarms</span>
             </a>
             <a [class.active]="checkActive(filterTypes.ALARMS)" (click)="filterData(filterTypes.ALARMS)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>notifications</mat-icon>
                 </button>
-                <span mat-line style="display: block;">Alarms</span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;">Alarms</span>
             </a>
             <a [class.active]="checkActive(filterTypes.SETTINGS)" (click)="filterData(filterTypes.SETTINGS)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>settings</mat-icon>
                 </button>
-                <span mat-line style="display: block;">Settings </span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;">Settings </span>
             </a>
-
             <a [class.active]="checkActive(filterTypes.SESSION)" (click)="filterData(filterTypes.SESSION)">
                 <button mat-icon-button>
                     <mat-icon mat-list-icon>update</mat-icon>
                 </button>
-                <span mat-line style="display: block;"> Sessions</span>
+                <span class="mat-h3 no-margin-bottom" mat-line style="display: block;"> Sessions</span>
             </a>
         </div>
     </div>

@@ -6,8 +6,7 @@
         padding: 0;
     }
     a {
-        padding: 4px;
-        font-size: 110%;
+        padding: 8px;
         text-align: center;
         color: map-get($pxb-black, 500);
         &.active {
@@ -18,15 +17,11 @@
         padding: 16px;
         border-bottom: 1px solid map-get($pxb-gray, 100);
     }
-    h5 {
+    .no-margin-bottom {
         margin: 0;
     }
     .material-icons {
         font-size: 32px;
-    }
-
-    .mat-button-base {
-        margin-bottom: 8px;
     }
 
     .mat-icon-button .mat-icon {
