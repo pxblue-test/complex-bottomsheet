@@ -1,0 +1,50 @@
+@import '~@pxblue/colors/palette.scss';
+
+.header-content {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.menu-icon {
+    height: 24px;
+}
+
+.mat-list-base .mat-list-item .mat-list-icon.padded {
+    padding: 8px;
+}
+
+.mat-list-base .mat-list-item .mat-line {
+    color: map-get($pxb-gray, 500);
+}
+
+.mat-list-base .mat-list-item .mat-line.list-item-title {
+    font-weight: 600;
+    color: inherit;
+}
+
+.title-wrapper {
+    flex: 1;
+    z-index: 10;
+    margin-left: 32px;
+    .mat-h3 {
+        margin-bottom: 0;
+    }
+}
+
+.mat-list-base {
+    padding-top: 0;
+}
+
+mat-list-item {
+    border-left: 6px solid transparent;
+    box-sizing: border-box;
+    &.active {
+        border-left-color: map-get($pxb-red, 500);
+        .list-item-title {
+            color: map-get($pxb-red, 500);
+        }
+        mat-icon {
+            color: map-get($pxb-white, 50);
+            background: map-get($pxb-red, 500);
+        }
+    }
+}
